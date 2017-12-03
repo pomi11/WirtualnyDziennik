@@ -5,9 +5,9 @@ using System.Web;
 
 namespace WirtualnyDziennik.Models
 {
-    public class TypTresci
+    public class RodzicUczen
     {
-        public virtual int id { get; set; }
-        public virtual String nazwa { get; set; }
+        public virtual int rodzic_id { get; set; }
+        public virtual int uczen_id { get; set; }
     }
 }

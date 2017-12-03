@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using NHibernate;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using NHibernate.Tool.hbm2ddl;
 
 namespace WirtualnyDziennik.Models
 {
@@ -14,13 +17,44 @@ namespace WirtualnyDziennik.Models
     {
         public static ISession OpenSession()
         {
-            var configuration = new Configuration();
-            var configurationPath = HttpContext.Current.Server.MapPath(@"~\Models\hibernate.cfg.xml");
-            configuration.Configure(configurationPath);
-            var typConfigurationFile = HttpContext.Current.Server.MapPath(@"~\Mappings\TypTresci.hbm.xml");
-            configuration.AddFile(typConfigurationFile);
-            ISessionFactory sessionFactory = configuration.BuildSessionFactory();
+            String connectionString = "User ID=PS2_NS_LP;Password=*****;Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 212.33.90.213)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = XE)))";
+            ISessionFactory sessionFactory = Fluently.Configure()
+                .Database(OracleClientConfiguration.Oracle10.ConnectionString(connectionString)
+                  .ConnectionString(connectionString)
+                              .ShowSql()
+                )
+               .Mappings(m => {
+                   m.FluentMappings.AddFromAssemblyOf<Tresc>();
+                   m.FluentMappings.AddFromAssemblyOf<TypTresci>();
+                   /*Tu dodawać kolejne tabele*/
+               })
+                .ExposeConfiguration(cfg => new SchemaExport(cfg)
+                                                .Create(false, false))
+                .BuildSessionFactory();
             return sessionFactory.OpenSession();
         }
+
+        private static ISessionFactory CreateSessionFactory()
+        {
+
+            var c = Fluently.Configure();
+            try
+            {
+                //Replace connectionstring and default schema
+                c.Database(OracleDataClientConfiguration.Oracle10.
+                    ConnectionString(x =>
+                    x.FromConnectionStringWithKey("default"))
+                   .DefaultSchema("SchemaName"));
+                c.Mappings(m => m.FluentMappings.AddFromAssemblyOf<TypTresci>()
+               /* c.Mappings(m => m.FluentMappings.AddFromAssemblyOf<Tresc>()*/);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return c.BuildSessionFactory();
+        }
+
+
     }
 }

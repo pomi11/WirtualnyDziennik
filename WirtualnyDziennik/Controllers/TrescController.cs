@@ -8,42 +8,44 @@ using WirtualnyDziennik.Models;
 
 namespace WirtualnyDziennik.Controllers
 {
-    public class TypTresciController : Controller
+    public class TrescController : Controller
     {
-         public ActionResult Index()
+        public ActionResult Index()
         {
-            IList<TypTresci> TTresci;
-            
-            using (ISession session = NhibernateSession.OpenSession())  
+            List<Tresc> tresc;
+
+            using (ISession session = NhibernateSession.OpenSession())
             {
-                TTresci = session.Query<TypTresci>().ToList(); 
+                tresc = session.Query<Tresc>().ToList();
             }
-            return View(TTresci);
+            
+            return View(tresc);
         }
 
         public ActionResult Details(int id)
         {
-            TypTresci TTresc = new TypTresci();
+            Tresc tresc = new Tresc();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                TTresc = session.Query<TypTresci>().Where(b => b.id == id).FirstOrDefault();
+                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
             }
 
-            return View(TTresc);
+            return View(tresc);
         }
 
         public ActionResult Create()
         {
-            TypTresci TTresc = new TypTresci();
-            TTresc.id = 1;
-            TTresc.nazwa = "asda";
+            //Tresc tr = new Tresc();
+            //tr.tresc = "asda";
+            //tr.tytul = "pierwsze";
+           // tr.typtresci_id = 2;
             using (ISession session = NhibernateSession.OpenSession())
             {
 
-                using (ITransaction transaction = session.BeginTransaction())   
+                using (ITransaction transaction = session.BeginTransaction())
                 {
-                    session.Save(TTresc);
-                    transaction.Commit();  
+                   // session.Save(/*tr*/);
+                    transaction.Commit();
                 }
             }
             return View();
@@ -54,15 +56,15 @@ namespace WirtualnyDziennik.Controllers
         {
             try
             {
-                TypTresci TTresc = new TypTresci();                                     
-                TTresc.nazwa = nazwa;
+                Tresc tresc = new Tresc();
+                tresc.tresc = nazwa;
                 using (ISession session = NhibernateSession.OpenSession())
                 {
 
-                    using (ITransaction transaction = session.BeginTransaction()) 
+                    using (ITransaction transaction = session.BeginTransaction())
                     {
-                        session.Save(TTresc);
-                        transaction.Commit();  
+                        session.Save(tresc);
+                        transaction.Commit();
                     }
                 }
                 return RedirectToAction("Index");
@@ -75,14 +77,14 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Edit(int id)
         {
-            TypTresci TTresc = new TypTresci();
+            Tresc tresc = new Tresc();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                TTresc = session.Query<TypTresci>().Where(b => b.id == id).FirstOrDefault();
+                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
             }
 
             ViewBag.SubmitAction = "Save";
-            return View(TTresc);
+            return View(tresc);
         }
 
         [HttpPost]
@@ -90,14 +92,14 @@ namespace WirtualnyDziennik.Controllers
         {
             try
             {
-                TypTresci TTresc = new TypTresci();
-                TTresc.id = id;
-                TTresc.nazwa = collection["Nazwa"].ToString();
+                Tresc tresc = new Tresc();
+                tresc.id = id;
+                tresc.tresc = collection["Nazwa"].ToString();
                 using (ISession session = NhibernateSession.OpenSession())
                 {
                     using (ITransaction transaction = session.BeginTransaction())
                     {
-                        session.SaveOrUpdate(TTresc);
+                        session.SaveOrUpdate(tresc);
                         transaction.Commit();
                     }
                 }
@@ -111,13 +113,13 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Delete(int id)
         {
-            TypTresci TTresc = new TypTresci();
+            Tresc tresc = new Tresc();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                TTresc = session.Query<TypTresci>().Where(b => b.id == id).FirstOrDefault();
+                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
             }
             ViewBag.SubmitAction = "Confirm delete";
-            return View("Edit", TTresc);
+            return View("Edit", tresc);
         }
 
         [HttpPost]
@@ -127,11 +129,11 @@ namespace WirtualnyDziennik.Controllers
             {
                 using (ISession session = NhibernateSession.OpenSession())
                 {
-                    TypTresci TTresc = session.Get<TypTresci>(id);
+                    Tresc tresc = session.Get<Tresc>(id);
 
                     using (ITransaction trans = session.BeginTransaction())
                     {
-                        session.Delete(TTresc);
+                        session.Delete(tresc);
                         trans.Commit();
                     }
                 }
