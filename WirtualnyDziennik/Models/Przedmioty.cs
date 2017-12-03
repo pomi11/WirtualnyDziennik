@@ -9,6 +9,6 @@ namespace WirtualnyDziennik.Models
     {
         public virtual int id { get; set; }
         public virtual String nazwa { get; set; }
-        public virtual int nauczyciel_id { get; set; }
+        public virtual Uzytkownicy Nauczyciel { get; set; } // trzeba dodać jakieś ograniczenie, że tylko TYP UZYTKOWNIKA=NAUCZYCIEL
     }
 }

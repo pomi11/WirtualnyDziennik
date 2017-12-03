@@ -11,8 +11,9 @@ namespace WirtualnyDziennik.Mappings
     {
         public TypTresciMap()
         {
-            Id(x => x.id);
+            Id(x => x.id).GeneratedBy.Increment();/* SequenceIdentity("TYPTRESCI_ID_SEQ");*/
             Map(x => x.nazwa);
+          //  HasMany(x => x.Costam).KeyColumn("typtresci_id").Inverse().Cascade.All();
             Table("TypTresci");
         }
     }

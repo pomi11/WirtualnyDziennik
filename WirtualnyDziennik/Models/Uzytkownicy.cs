@@ -21,6 +21,6 @@ namespace WirtualnyDziennik.Models
         public virtual int miejsce_kod { get; set; }
         public virtual String miejsce_ur { get; set; }
         public virtual DateTime data_ur{ get; set; }
-        public virtual int typu_id { get; set; }
+        public virtual TypUzytkownika TypUzytkownika { get; set; }
 }
 }

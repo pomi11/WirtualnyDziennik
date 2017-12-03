@@ -164,14 +164,29 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\KlasaUczenController.cs" />
+    <Compile Include="Controllers\PlanLekcjiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KlasyController.cs" />
+    <Compile Include="Controllers\PrzedmiotyController.cs" />
     <Compile Include="Controllers\TrescController.cs" />
     <Compile Include="Controllers\TypTresciController.cs" />
+    <Compile Include="Controllers\TypUzytkownikaController.cs" />
+    <Compile Include="Controllers\UzytkownicyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappings\AutorTresciMap.cs" />
+    <Compile Include="Mappings\DziennikUczniaMap.cs" />
+    <Compile Include="Mappings\KlasaUczenMap.cs" />
+    <Compile Include="Mappings\KlasyMap.cs" />
+    <Compile Include="Mappings\PlanLekcjiMap.cs" />
+    <Compile Include="Mappings\PrzedmiotyMap.cs" />
+    <Compile Include="Mappings\RodzicUczenMap.cs" />
     <Compile Include="Mappings\TrescMap.cs" />
     <Compile Include="Mappings\TypTresciMap.cs" />
+    <Compile Include="Mappings\TypUzytkownikaMap.cs" />
+    <Compile Include="Mappings\UzytkownicyMap.cs" />
     <Compile Include="Models\AutorTresci.cs" />
     <Compile Include="Models\DziennikUcznia.cs" />
     <Compile Include="Models\KlasaUczen.cs" />
@@ -234,6 +249,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DziennikUcznia\" />
+    <Folder Include="Views\KlasaUczen\" />
+    <Folder Include="Views\Klasy\" />
+    <Folder Include="Views\Przedmioty\" />
+    <Folder Include="Views\TypUzytkownika\" />
+    <Folder Include="Views\Uzytkownicy\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

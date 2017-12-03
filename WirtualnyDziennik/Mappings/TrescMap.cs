@@ -11,12 +11,11 @@ namespace WirtualnyDziennik.Mappings
     {
         public TrescMap()
         {
-            Id(x => x.id);
+            Id(x => x.id).GeneratedBy.Increment();/* SequenceIdentity("TRESC_ID_SEQ");*/
             Map(x => x.tytul);
             Map(x => x.tresc);
-            Map(x => x.typtresci_id);
+            References(x => x.TypTresci);
             Table("Tresc");
-            References(x => x.TTresci, "typtresci_id").Cascade.None();
 
         }
     }

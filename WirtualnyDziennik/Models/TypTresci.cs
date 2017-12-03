@@ -9,5 +9,6 @@ namespace WirtualnyDziennik.Models
     {
         public virtual int id { get; set; }
         public virtual String nazwa { get; set; }
+        public virtual IList<Tresc> Costam { get; set; }
     }
 }

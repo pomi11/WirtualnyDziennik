@@ -34,9 +34,7 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Create()
         {
-            TypTresci TTresc = new TypTresci();
-            TTresc.id = 1;
-            TTresc.nazwa = "asda";
+           /* TypTresci TTresc = new TypTresci();
             using (ISession session = NhibernateSession.OpenSession())
             {
 
@@ -45,7 +43,7 @@ namespace WirtualnyDziennik.Controllers
                     session.Save(TTresc);
                     transaction.Commit();  
                 }
-            }
+            }*/
             return View();
         }
 

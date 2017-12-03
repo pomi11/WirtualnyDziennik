@@ -8,29 +8,29 @@ using WirtualnyDziennik.Models;
 
 namespace WirtualnyDziennik.Controllers
 {
-    public class TrescController : Controller
+    public class PrzedmiotyController : Controller
     {
         public ActionResult Index()
         {
-            List<Tresc> tresc;
+            List<Przedmioty> Przedmioty;
 
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().ToList();
+                Przedmioty = session.Query<Przedmioty>().ToList();
             }
-            
-            return View(tresc);
+
+            return View(Przedmioty);
         }
 
         public ActionResult Details(int id)
         {
-            Tresc tresc = new Tresc();
+            Przedmioty Przedmioty = new Przedmioty();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
+                Przedmioty = session.Query<Przedmioty>().Where(b => b.id == id).FirstOrDefault();
             }
 
-            return View(tresc);
+            return View(Przedmioty);
         }
 
         public ActionResult Create()
@@ -39,7 +39,7 @@ namespace WirtualnyDziennik.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Tresc model)
+        public ActionResult Create(Przedmioty model)
         {
             try
             {
@@ -62,29 +62,29 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Edit(int id)
         {
-            Tresc tresc = new Tresc();
+            Przedmioty Przedmioty = new Przedmioty();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
+                Przedmioty = session.Query<Przedmioty>().Where(b => b.id == id).FirstOrDefault();
             }
 
             ViewBag.SubmitAction = "Save";
-            return View(tresc);
+            return View(Przedmioty);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, Tresc model)
+        public ActionResult Edit(int id, Przedmioty model)
         {
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())
                 {
-                    Tresc tresc = session.Get<Tresc>(id);
-                    tresc.tresc = model.tresc;
+                    Przedmioty Przedmioty = session.Get<Przedmioty>(id);
+                    Przedmioty.nazwa = model.nazwa;
                     using (ITransaction transaction = session.BeginTransaction())
                     {
-                        
-                        session.SaveOrUpdate(tresc);
+
+                        session.SaveOrUpdate(Przedmioty);
                         transaction.Commit();
                     }
                 }
@@ -98,13 +98,13 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Delete(int id)
         {
-            Tresc tresc = new Tresc();
+            Przedmioty Przedmioty = new Przedmioty();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
+                Przedmioty = session.Query<Przedmioty>().Where(b => b.id == id).FirstOrDefault();
             }
             ViewBag.SubmitAction = "Confirm delete";
-            return View("Edit", tresc);
+            return View("Edit", Przedmioty);
         }
 
         [HttpPost]
@@ -114,11 +114,11 @@ namespace WirtualnyDziennik.Controllers
             {
                 using (ISession session = NhibernateSession.OpenSession())
                 {
-                    Tresc tresc = session.Get<Tresc>(id);
+                    Przedmioty Przedmioty = session.Get<Przedmioty>(id);
 
                     using (ITransaction trans = session.BeginTransaction())
                     {
-                        session.Delete(tresc);
+                        session.Delete(Przedmioty);
                         trans.Commit();
                     }
                 }

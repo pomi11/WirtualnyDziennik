@@ -8,47 +8,58 @@ using WirtualnyDziennik.Models;
 
 namespace WirtualnyDziennik.Controllers
 {
-    public class TrescController : Controller
+    public class KlasyController : Controller
     {
         public ActionResult Index()
         {
-            List<Tresc> tresc;
+            IList<Klasy> klasy;
 
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().ToList();
+                klasy = session.Query<Klasy>().ToList();
             }
-            
-            return View(tresc);
+            return View(klasy);
         }
 
         public ActionResult Details(int id)
         {
-            Tresc tresc = new Tresc();
+            Klasy klasy = new Klasy();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
+                klasy = session.Query<Klasy>().Where(b => b.id == id).FirstOrDefault();
             }
 
-            return View(tresc);
+            return View(klasy);
         }
 
         public ActionResult Create()
         {
+            /* Klasy klasy = new Klasy();
+             using (ISession session = NhibernateSession.OpenSession())
+             {
+
+                 using (ITransaction transaction = session.BeginTransaction())   
+                 {
+                     session.Save(klasy);
+                     transaction.Commit();  
+                 }
+             }*/
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(Tresc model)
+        public ActionResult Create(String nazwa)
         {
             try
             {
+                Klasy klasy = new Klasy();
+                klasy.nazwa = nazwa;
                 using (ISession session = NhibernateSession.OpenSession())
                 {
 
                     using (ITransaction transaction = session.BeginTransaction())
                     {
-                        session.Save(model);
+                        session.Save(klasy);
                         transaction.Commit();
                     }
                 }
@@ -62,29 +73,29 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Edit(int id)
         {
-            Tresc tresc = new Tresc();
+            Klasy klasy = new Klasy();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
+                klasy = session.Query<Klasy>().Where(b => b.id == id).FirstOrDefault();
             }
 
             ViewBag.SubmitAction = "Save";
-            return View(tresc);
+            return View(klasy);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, Tresc model)
+        public ActionResult Edit(int id, FormCollection collection)
         {
             try
             {
+                Klasy klasy = new Klasy();
+                klasy.id = id;
+                klasy.nazwa = collection["Nazwa"].ToString();
                 using (ISession session = NhibernateSession.OpenSession())
                 {
-                    Tresc tresc = session.Get<Tresc>(id);
-                    tresc.tresc = model.tresc;
                     using (ITransaction transaction = session.BeginTransaction())
                     {
-                        
-                        session.SaveOrUpdate(tresc);
+                        session.SaveOrUpdate(klasy);
                         transaction.Commit();
                     }
                 }
@@ -98,13 +109,13 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Delete(int id)
         {
-            Tresc tresc = new Tresc();
+            Klasy klasy = new Klasy();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
+                klasy = session.Query<Klasy>().Where(b => b.id == id).FirstOrDefault();
             }
             ViewBag.SubmitAction = "Confirm delete";
-            return View("Edit", tresc);
+            return View("Edit", klasy);
         }
 
         [HttpPost]
@@ -114,11 +125,11 @@ namespace WirtualnyDziennik.Controllers
             {
                 using (ISession session = NhibernateSession.OpenSession())
                 {
-                    Tresc tresc = session.Get<Tresc>(id);
+                    Klasy klasy = session.Get<Klasy>(id);
 
                     using (ITransaction trans = session.BeginTransaction())
                     {
-                        session.Delete(tresc);
+                        session.Delete(klasy);
                         trans.Commit();
                     }
                 }

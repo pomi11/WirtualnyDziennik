@@ -17,7 +17,7 @@
             @Html.DisplayNameFor(model => model.tresc)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.typtresci_id)
+            @Html.DisplayNameFor(model => model.TypTresci.id)
         </th>
         <th></th>
     </tr>
@@ -32,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.tresc)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.typtresci_id)
+                @Html.DisplayFor(modelItem => item.TypTresci.id)
             </td>
             <td>
                 <button onclick="location.href='@Url.Action("Edit", "Tresc", new { id = item.id } )'" type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit </button>

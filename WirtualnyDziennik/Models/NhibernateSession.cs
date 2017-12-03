@@ -17,13 +17,20 @@ namespace WirtualnyDziennik.Models
     {
         public static ISession OpenSession()
         {
-            String connectionString = "User ID=PS2_NS_LP;Password=*****;Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 212.33.90.213)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = XE)))";
+            String connectionString = "User ID=PS2_NS_LP;Password=****;Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 212.33.90.213)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = XE)))";
             ISessionFactory sessionFactory = Fluently.Configure()
                 .Database(OracleClientConfiguration.Oracle10.ConnectionString(connectionString)
                   .ConnectionString(connectionString)
-                              .ShowSql()
-                )
-               .Mappings(m => {
+                              .ShowSql()).Mappings(m => {
+                   m.FluentMappings.AddFromAssemblyOf<TypUzytkownika>();
+                   m.FluentMappings.AddFromAssemblyOf<Uzytkownicy>();
+                   m.FluentMappings.AddFromAssemblyOf<AutorTresci>();
+                   m.FluentMappings.AddFromAssemblyOf<DziennikUcznia>();
+                   m.FluentMappings.AddFromAssemblyOf<KlasaUczen>();
+                   m.FluentMappings.AddFromAssemblyOf<Klasy>();
+                   m.FluentMappings.AddFromAssemblyOf<PlanLekcji>();
+                   m.FluentMappings.AddFromAssemblyOf<Przedmioty>();
+                   m.FluentMappings.AddFromAssemblyOf<RodzicUczen>();
                    m.FluentMappings.AddFromAssemblyOf<Tresc>();
                    m.FluentMappings.AddFromAssemblyOf<TypTresci>();
                    /*Tu dodawać kolejne tabele*/
@@ -34,7 +41,7 @@ namespace WirtualnyDziennik.Models
             return sessionFactory.OpenSession();
         }
 
-        private static ISessionFactory CreateSessionFactory()
+    /*    private static ISessionFactory CreateSessionFactory()
         {
 
             var c = Fluently.Configure();
@@ -46,14 +53,14 @@ namespace WirtualnyDziennik.Models
                     x.FromConnectionStringWithKey("default"))
                    .DefaultSchema("SchemaName"));
                 c.Mappings(m => m.FluentMappings.AddFromAssemblyOf<TypTresci>()
-               /* c.Mappings(m => m.FluentMappings.AddFromAssemblyOf<Tresc>()*/);
+                c.Mappings(m => m.FluentMappings.AddFromAssemblyOf<Tresc>());
             }
             catch (Exception ex)
             {
                 throw;
             }
             return c.BuildSessionFactory();
-        }
+        }*/
 
 
     }

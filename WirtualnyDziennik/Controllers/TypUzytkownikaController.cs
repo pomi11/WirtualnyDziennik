@@ -8,47 +8,58 @@ using WirtualnyDziennik.Models;
 
 namespace WirtualnyDziennik.Controllers
 {
-    public class TrescController : Controller
+    public class TypUzytkownikaController : Controller
     {
         public ActionResult Index()
         {
-            List<Tresc> tresc;
+            IList<TypUzytkownika> TUzytkownik;
 
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().ToList();
+                TUzytkownik = session.Query<TypUzytkownika>().ToList();
             }
-            
-            return View(tresc);
+            return View(TUzytkownik);
         }
 
         public ActionResult Details(int id)
         {
-            Tresc tresc = new Tresc();
+            TypUzytkownika TUzytkownik = new TypUzytkownika();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
+                TUzytkownik = session.Query<TypUzytkownika>().Where(b => b.id == id).FirstOrDefault();
             }
 
-            return View(tresc);
+            return View(TUzytkownik);
         }
 
         public ActionResult Create()
         {
+            /* TypTresci TTresc = new TypTresci();
+             using (ISession session = NhibernateSession.OpenSession())
+             {
+
+                 using (ITransaction transaction = session.BeginTransaction())   
+                 {
+                     session.Save(TTresc);
+                     transaction.Commit();  
+                 }
+             }*/
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(Tresc model)
+        public ActionResult Create(String nazwa)
         {
             try
             {
+               TypUzytkownika TUzytkownik = new TypUzytkownika();
+                TUzytkownik.nazwa = nazwa;
                 using (ISession session = NhibernateSession.OpenSession())
                 {
 
                     using (ITransaction transaction = session.BeginTransaction())
                     {
-                        session.Save(model);
+                        session.Save(TUzytkownik);
                         transaction.Commit();
                     }
                 }
@@ -62,29 +73,29 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Edit(int id)
         {
-            Tresc tresc = new Tresc();
+            TypUzytkownika TUzytkownik = new TypUzytkownika();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
+                TUzytkownik = session.Query<TypUzytkownika>().Where(b => b.id == id).FirstOrDefault();
             }
 
             ViewBag.SubmitAction = "Save";
-            return View(tresc);
+            return View(TUzytkownik);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, Tresc model)
+        public ActionResult Edit(int id, FormCollection collection)
         {
             try
             {
+                TypUzytkownika TUzytkownik = new TypUzytkownika();
+                TUzytkownik.id = id;
+                TUzytkownik.nazwa = collection["Nazwa"].ToString();
                 using (ISession session = NhibernateSession.OpenSession())
                 {
-                    Tresc tresc = session.Get<Tresc>(id);
-                    tresc.tresc = model.tresc;
                     using (ITransaction transaction = session.BeginTransaction())
                     {
-                        
-                        session.SaveOrUpdate(tresc);
+                        session.SaveOrUpdate(TUzytkownik);
                         transaction.Commit();
                     }
                 }
@@ -98,13 +109,13 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Delete(int id)
         {
-            Tresc tresc = new Tresc();
+            TypUzytkownika TUzytkownik = new TypUzytkownika();
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
+                TUzytkownik = session.Query<TypUzytkownika>().Where(b => b.id == id).FirstOrDefault();
             }
             ViewBag.SubmitAction = "Confirm delete";
-            return View("Edit", tresc);
+            return View("Edit", TUzytkownik);
         }
 
         [HttpPost]
@@ -114,11 +125,11 @@ namespace WirtualnyDziennik.Controllers
             {
                 using (ISession session = NhibernateSession.OpenSession())
                 {
-                    Tresc tresc = session.Get<Tresc>(id);
+                    TypUzytkownika TUzytkownik = session.Get<TypUzytkownika>(id);
 
                     using (ITransaction trans = session.BeginTransaction())
                     {
-                        session.Delete(tresc);
+                        session.Delete(TUzytkownik);
                         trans.Commit();
                     }
                 }
