@@ -110,7 +110,7 @@ namespace WirtualnyDziennik.Controllers
                         SmtpClient smtp = new SmtpClient("smtp.gmail.com",587);
                         
                         smtp.EnableSsl = true;
-                        smtp.Credentials = new NetworkCredential("pomidor1992@gmail.com", "%6(e7GmaiL");
+                        smtp.Credentials = new NetworkCredential("pomidor1992@gmail.com", "haslo_do_maila");
                         MailAddress od = new MailAddress("pomidor1992@gmail.com");
                             MailAddress Do = new MailAddress(model.email);
                             MailMessage s = new MailMessage(od,Do);
