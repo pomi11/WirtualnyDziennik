@@ -12,21 +12,69 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+             <!--   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nazwa aplikacji", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </button>-->
+                
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
+                    
                     <li>@Html.ActionLink("Informacje", "About", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                    
+                    
+                    @if (this.Session["UserProfile"] == null)
+                    {
+                        <li>
+                            @using (Html.BeginForm("Login", "Home"))
+                            {
+                            <input type="text" name="login" id="login" />
+                            <input type="password" name="haslo" id="haslo" />
+                            <input type="submit" name="Loguj" value="Loguj" />
+                            }</li>
+
+                    }
+                    else
+                    {
+                       // Response.Redirect("~/UserView");
+                        <li>@Html.ActionLink("Wyloguj", "Logout", "Home")</li>
+                    }
+                    
+                    <li>@Html.ActionLink("Zarejestruj","Register","Home")</li>
+                    <li>@Html.ActionLink("Przypomnienie hasła", "Remind", "Home")</li>
                 </ul>
             </div>
         </div>
+    </div>
+    <div id="lewy" class="left navbar-left  navbar-inverse ">
+        <!--<div class="container">-->
+            
+                <ul class="nav">
+                    @if (this.Session["UserProfile"] != null)
+                    {
+                        var Konto = this.Session["UserProfile"] as WirtualnyDziennik.Models.UserProfileSessionData;
+                        <li>@Html.ActionLink("Edytuj dane konta", "Edit","Uzytkownicy", new { id = Konto.UserId },null)</li>
+                        <li>@Html.ActionLink("Wyślij wiadomość", "Message","Tresc")</li>
+                        <li>@Html.ActionLink("Odebrane", "Retrieve","Tresc",new { id = Konto.UserId },null)</li>
+                        if (Konto.Typ !="ADMIN")
+                        {
+                            <li>@Html.ActionLink("Przeglądaj oceny", "Index")</li>
+                        <li>@Html.ActionLink("Przeglądaj obecności", "Index")</li>
+                        }
+                        if (Konto.Typ == "ADMIN")
+                        {
+                            <li>@Html.ActionLink("Edytuj Uzytkownikow", "Index")</li>
+                            <li>@Html.ActionLink("Edytuj Przedmioty", "Index")</li>
+                            <li>@Html.ActionLink("Edytuj klasy", "Index")</li>
+                            <li>@Html.ActionLink("Przypisz uczniow", "Index")</li>
+                            <li>@Html.ActionLink("Przypisz nauczycieli", "Index")</li> 
+                        }
+                    }
+                </ul>
+        <!--</div>-->
     </div>
     <div class="container body-content">
         @RenderBody()

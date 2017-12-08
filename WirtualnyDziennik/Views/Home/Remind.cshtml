@@ -1,18 +1,15 @@
-﻿@model WirtualnyDziennik.Models.TypTresci
-@{
-    ViewBag.Title = "Edit";
-}
+﻿@model WirtualnyDziennik.Models.Uzytkownicy
 
+@{
+    ViewBag.Title = "Zarejestruj";
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
-
         <div class="form-group">
             @Html.LabelFor(model => model.nazwa, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -20,11 +17,18 @@
                 @Html.ValidationMessageFor(model => model.nazwa, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
 
-
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value=@ViewBag.SubmitAction class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
+                <p>@ViewBag.Message</p>
             </div>
         </div>
     </div>

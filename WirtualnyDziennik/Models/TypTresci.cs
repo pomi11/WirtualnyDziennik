@@ -9,6 +9,8 @@ namespace WirtualnyDziennik.Models
     {
         public virtual int id { get; set; }
         public virtual String nazwa { get; set; }
-        public virtual IList<Tresc> Costam { get; set; }
+        public virtual IList<TypTresci> Costam { get; set; }
+
+        public static List<System.Web.Mvc.SelectListItem> ListaDostepnych { get; set; }
     }
 }

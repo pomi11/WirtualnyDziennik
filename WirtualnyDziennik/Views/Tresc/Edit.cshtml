@@ -15,12 +15,33 @@
         @Html.HiddenFor(model => model.id)
 
         <div class="form-group">
+            @Html.LabelFor(model => model.tytul, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tytul, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tytul, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
             @Html.LabelFor(model => model.tresc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.tresc, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.tresc, "", new { @class = "text-danger" })
             </div>
         </div>
+@{var Konto = this.Session["UserProfile"] as WirtualnyDziennik.Models.UserProfileSessionData; }
+@if (this.Session["UserProfile"] != null)
+{
+    if (Konto.Typ == "ADMIN")
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypTresci, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TypTresci.id, WirtualnyDziennik.Models.TypTresci.ListaDostepnych, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TypTresci, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+}
 
 
         <div class="form-group">

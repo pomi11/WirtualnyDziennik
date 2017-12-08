@@ -14,6 +14,8 @@ namespace WirtualnyDziennik.Mappings
             Id(x => x.id).GeneratedBy.Increment();/* SequenceIdentity("TRESC_ID_SEQ");*/
             Map(x => x.tytul);
             Map(x => x.tresc);
+            Map(x => x.OD);
+            Map(x => x.DO);
             References(x => x.TypTresci);
             Table("Tresc");
 

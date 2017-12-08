@@ -19,9 +19,9 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
+    <IISExpressSSLPort>44331</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -164,14 +164,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AutorTresciController.cs" />
+    <Compile Include="Controllers\DziennikUczniaController.cs" />
     <Compile Include="Controllers\KlasaUczenController.cs" />
     <Compile Include="Controllers\PlanLekcjiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KlasyController.cs" />
     <Compile Include="Controllers\PrzedmiotyController.cs" />
+    <Compile Include="Controllers\RodzicUczenController.cs" />
     <Compile Include="Controllers\TrescController.cs" />
     <Compile Include="Controllers\TypTresciController.cs" />
     <Compile Include="Controllers\TypUzytkownikaController.cs" />
+    <Compile Include="Controllers\UserViewController.cs" />
     <Compile Include="Controllers\UzytkownicyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,6 +193,7 @@
     <Compile Include="Mappings\UzytkownicyMap.cs" />
     <Compile Include="Models\AutorTresci.cs" />
     <Compile Include="Models\DziennikUcznia.cs" />
+    <Compile Include="Models\Home.cs" />
     <Compile Include="Models\KlasaUczen.cs" />
     <Compile Include="Models\Klasy.cs" />
     <Compile Include="Models\NhibernateSession.cs" />
@@ -198,6 +203,7 @@
     <Compile Include="Models\Tresc.cs" />
     <Compile Include="Models\TypTresci.cs" />
     <Compile Include="Models\TypUzytkownika.cs" />
+    <Compile Include="Models\UserProfileSessionData.cs" />
     <Compile Include="Models\Uzytkownicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -246,15 +252,29 @@
     <Content Include="Views\Tresc\Edit.cshtml" />
     <Content Include="Views\Tresc\Details.cshtml" />
     <Content Include="Views\Tresc\Create.cshtml" />
+    <Content Include="Views\TypUzytkownika\Create.cshtml" />
+    <Content Include="Views\TypUzytkownika\Details.cshtml" />
+    <Content Include="Views\TypUzytkownika\Edit.cshtml" />
+    <Content Include="Views\TypUzytkownika\Index.cshtml" />
+    <Content Include="Views\Uzytkownicy\Create.cshtml" />
+    <Content Include="Views\Uzytkownicy\Details.cshtml" />
+    <Content Include="Views\Uzytkownicy\Edit.cshtml" />
+    <Content Include="Views\Uzytkownicy\Index.cshtml" />
+    <Content Include="Views\UserView\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutLeft.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Remind.cshtml" />
+    <Content Include="Views\Tresc\Message.cshtml" />
+    <Content Include="Views\Tresc\Retrieve.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AutorTresci\" />
     <Folder Include="Views\DziennikUcznia\" />
     <Folder Include="Views\KlasaUczen\" />
     <Folder Include="Views\Klasy\" />
     <Folder Include="Views\Przedmioty\" />
-    <Folder Include="Views\TypUzytkownika\" />
-    <Folder Include="Views\Uzytkownicy\" />
+    <Folder Include="Views\RodzicUczen\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

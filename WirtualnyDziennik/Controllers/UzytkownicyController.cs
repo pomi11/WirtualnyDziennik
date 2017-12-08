@@ -35,17 +35,29 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Create()
         {
+            using (ISession session = NhibernateSession.OpenSession())
+            {
+                List<TypUzytkownika> jakas = session.Query<TypUzytkownika>().ToList();
+                Uzytkownicy.ListaDostepnych = new List<System.Web.Mvc.SelectListItem>();
+                for (int i = 0; i < jakas.Count(); i++)
+                {
+                    SelectListItem Item = new SelectListItem();
+                    Item.Text = jakas[i].nazwa;
+                    Item.Value = jakas[i].id.ToString();
+                    Uzytkownicy.ListaDostepnych.Add(Item);
+                }
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(Uzytkownicy model)
-        {
+                  {             
             try
             {
+                
                 using (ISession session = NhibernateSession.OpenSession())
                 {
-
                     using (ITransaction transaction = session.BeginTransaction())
                     {
                         session.Save(model);
@@ -54,8 +66,9 @@ namespace WirtualnyDziennik.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            catch (Exception e)
+             catch (Exception e)
             {
+                ViewBag.Message = e.Message+"##ZRODLO##"+e.Source+"##DALEJ##"+e.InnerException;
                 return View();
             }
         }
@@ -65,9 +78,18 @@ namespace WirtualnyDziennik.Controllers
             Uzytkownicy Uzytkownicy = new Uzytkownicy();
             using (ISession session = NhibernateSession.OpenSession())
             {
+                List<TypUzytkownika> jakas = session.Query<TypUzytkownika>().ToList();
+                Uzytkownicy.ListaDostepnych = new List<System.Web.Mvc.SelectListItem>();
+                for (int i = 0; i < jakas.Count(); i++)
+                {
+                    SelectListItem Item = new SelectListItem();
+                    Item.Text = jakas[i].nazwa;
+                    Item.Value = jakas[i].id.ToString();
+                    Uzytkownicy.ListaDostepnych.Add(Item);
+                }
                 Uzytkownicy = session.Query<Uzytkownicy>().Where(b => b.id == id).FirstOrDefault();
             }
-
+            
             ViewBag.SubmitAction = "Save";
             return View(Uzytkownicy);
         }
@@ -80,20 +102,19 @@ namespace WirtualnyDziennik.Controllers
                 using (ISession session = NhibernateSession.OpenSession())
                 {
                     Uzytkownicy Uzytkownicy = session.Get<Uzytkownicy>(id);
-                    Uzytkownicy.nazwa = model.nazwa;
-                    Uzytkownicy.haslo = model.haslo;
-                    Uzytkownicy.pesel = model.pesel;
-                    Uzytkownicy.nazwisko = model.nazwisko;
-                    Uzytkownicy.imie = model.imie;
-                    Uzytkownicy.kod = model.kod;
-                    Uzytkownicy.miasto = model.miasto;
-                    Uzytkownicy.ulica = model.ulica;
-                    Uzytkownicy.numer = model.numer;
-                    Uzytkownicy.numer_m = model.numer_m;
-                    Uzytkownicy.miejsce_kod = model.miejsce_kod;
-                    Uzytkownicy.miejsce_ur = model.miejsce_ur;
-                    Uzytkownicy.data_ur = model.data_ur;
-                    Uzytkownicy.TypUzytkownika = model.TypUzytkownika;
+                        if(model.haslo!=null) Uzytkownicy.haslo = model.haslo;
+                        if(model.pesel!=0) Uzytkownicy.pesel = model.pesel;
+                        if (model.nazwisko != null) Uzytkownicy.nazwisko = model.nazwisko;
+                    if (model.imie != null) Uzytkownicy.imie = model.imie;
+                    if (model.kod != 0) Uzytkownicy.kod = model.kod;
+                    if (model.miasto != null) Uzytkownicy.miasto = model.miasto;
+                    if (model.ulica != null) Uzytkownicy.ulica = model.ulica;
+                    if (model.numer != 0) Uzytkownicy.numer = model.numer;
+                    if (model.numer_m != 0) Uzytkownicy.numer_m = model.numer_m;
+                    if (model.miejsce_kod != 0) Uzytkownicy.miejsce_kod = model.miejsce_kod;
+                    if (model.miejsce_ur != null) Uzytkownicy.miejsce_ur = model.miejsce_ur;
+                    if (model.data_ur != null) Uzytkownicy.data_ur = model.data_ur;
+                        if(Uzytkownicy.typu.id==1) Uzytkownicy.typu = (TypUzytkownika)session.Load("TypUzytkownika",model.typu.id);
                     using (ITransaction transaction = session.BeginTransaction())
                     {
 
@@ -112,15 +133,31 @@ namespace WirtualnyDziennik.Controllers
         public ActionResult Delete(int id)
         {
             Uzytkownicy Uzytkownicy = new Uzytkownicy();
+            List<Uzytkownicy> Lista = new List<Uzytkownicy>();
             using (ISession session = NhibernateSession.OpenSession())
             {
+              //  List<TypUzytkownika> jakas = session.Query<TypUzytkownika>().ToList();
+             //   Uzytkownicy.ListaDostepnych = new List<System.Web.Mvc.SelectListItem>();
+             //   for (int i = 0; i < jakas.Count(); i++)
+             //   {
+            //        SelectListItem Item = new SelectListItem();
+            //        Item.Text = jakas[i].nazwa;
+            //        Item.Value = jakas[i].id.ToString();
+           //         Uzytkownicy.ListaDostepnych.Add(Item);
+           //     }
                 Uzytkownicy = session.Query<Uzytkownicy>().Where(b => b.id == id).FirstOrDefault();
+                using (ITransaction Transaction = session.BeginTransaction())
+                {
+                    session.Delete(Uzytkownicy);
+                    Transaction.Commit();
+                }
+                Lista = session.Query<Uzytkownicy>().ToList();
             }
-            ViewBag.SubmitAction = "Confirm delete";
-            return View("Edit", Uzytkownicy);
+            //ViewBag.SubmitAction = "Confirm delete";
+            return View("Index");
         }
 
-        [HttpPost]
+       /* [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
@@ -141,6 +178,6 @@ namespace WirtualnyDziennik.Controllers
             {
                 return View();
             }
-        }
+        }*/
     }
 }

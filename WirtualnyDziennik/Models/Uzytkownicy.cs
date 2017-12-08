@@ -10,7 +10,8 @@ namespace WirtualnyDziennik.Models
         public virtual int id { get; set; }
         public virtual String nazwa { get; set; }
         public virtual String haslo { get; set; }
-        public virtual int pesel { get; set; }
+        public virtual String email { get; set; }
+        public virtual UInt64 pesel { get; set; }
         public virtual String nazwisko { get; set; }
         public virtual String imie { get; set; }
         public virtual int kod { get; set; }
@@ -21,6 +22,8 @@ namespace WirtualnyDziennik.Models
         public virtual int miejsce_kod { get; set; }
         public virtual String miejsce_ur { get; set; }
         public virtual DateTime data_ur{ get; set; }
-        public virtual TypUzytkownika TypUzytkownika { get; set; }
-}
+        public virtual TypUzytkownika typu { get; set; }
+
+        public static List<System.Web.Mvc.SelectListItem> ListaDostepnych { get; set; }
+    }
 }

@@ -14,6 +14,7 @@ namespace WirtualnyDziennik.Mappings
             Id(x => x.id).GeneratedBy.Increment();
             Map(x => x.nazwa);
             Map(x => x.haslo);
+            Map(x => x.email);
             Map(x => x.imie);
             Map(x => x.pesel);
             Map(x => x.nazwisko);
@@ -25,7 +26,7 @@ namespace WirtualnyDziennik.Mappings
             Map(x => x.miejsce_kod);
             Map(x => x.miejsce_ur);
             Map(x => x.data_ur);
-            References(x => x.TypUzytkownika);
+            References(x => x.typu);
             Table("Uzytkownicy");
         }
     }

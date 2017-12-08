@@ -137,7 +137,8 @@ namespace WirtualnyDziennik.Controllers
             }
             catch (Exception e)
             {
-                return View();
+                ViewBag.Message = e.Message + "##ZRODLO##" + e.Source + "##DALEJ##" + e.InnerException;
+                return RedirectToAction("Index");
             }
         }
     }
