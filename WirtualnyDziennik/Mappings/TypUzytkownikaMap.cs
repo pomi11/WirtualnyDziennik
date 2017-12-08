@@ -11,7 +11,7 @@ namespace WirtualnyDziennik.Mappings
     {
         public TypUzytkownikaMap()
         {
-            Id(x => x.id).GeneratedBy.Increment();
+            Id(x => x.id).GeneratedBy./*Increment();*/SequenceIdentity("TYPUZYTKOWNIKA_ID_SEQ");
             Map(x => x.nazwa);
             Table("TypUzytkownika");
         }

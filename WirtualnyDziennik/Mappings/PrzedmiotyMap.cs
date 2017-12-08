@@ -11,7 +11,7 @@ namespace WirtualnyDziennik.Mappings
     {
         public PrzedmiotyMap()
         {
-            Id(x => x.id).GeneratedBy.Increment();
+            Id(x => x.id).GeneratedBy./* Increment();*/SequenceIdentity("PRZEDMIOTY_ID_SEQ");
             Map(x => x.nazwa);
             References(x => x.Nauczyciel);
             Table("Przedmioty");

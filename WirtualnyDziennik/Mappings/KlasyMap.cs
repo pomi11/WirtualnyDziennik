@@ -11,7 +11,7 @@ namespace WirtualnyDziennik.Mappings
     {
         public KlasyMap()
         {
-            Id(x => x.id).GeneratedBy.Increment();
+            Id(x => x.id).GeneratedBy./* Increment();*/SequenceIdentity("KLASY_ID_SEQ");
             Map(x => x.nazwa);
             References(x => x.Nauczyciel);
            // Map(x => x.Nauczyciel);

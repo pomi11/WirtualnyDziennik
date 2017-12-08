@@ -61,7 +61,7 @@
                         <li>@Html.ActionLink("Odebrane", "Retrieve","Tresc",new { id = Konto.UserId },null)</li>
                         if (Konto.Typ !="ADMIN")
                         {
-                            <li>@Html.ActionLink("Przeglądaj oceny", "Index")</li>
+                        <li>@Html.ActionLink("Przeglądaj oceny", "Index","Grade", new { id = Konto.UserId }, null)</li>
                         <li>@Html.ActionLink("Przeglądaj obecności", "Index")</li>
                         }
                         if (Konto.Typ == "ADMIN")

@@ -14,6 +14,6 @@ namespace WirtualnyDziennik.Models
         public virtual String DO { get; set; }
         //public virtual int typtresci_id { get; set; }
         public virtual TypTresci TypTresci { get; set; }
-        public static IList<System.Web.Mvc.SelectListItem> ListaDostepnych { get; set; }
+        public static List<System.Web.Mvc.SelectListItem> ListaDostepnych { get; set; }
     }
 }

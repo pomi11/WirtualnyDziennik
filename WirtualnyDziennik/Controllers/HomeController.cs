@@ -1,5 +1,6 @@
 ﻿using NHibernate;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,7 +15,13 @@ namespace WirtualnyDziennik.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            List<Tresc> lista = new List<Tresc>();
+            using (ISession session = NhibernateSession.OpenSession())
+            {
+                lista = session.Query<Tresc>().Where(b => b.TypTresci.id == 1).ToList<Tresc>();
+            }
+                
+            return View(lista);
         }
 
         public ActionResult About()
@@ -79,7 +86,7 @@ namespace WirtualnyDziennik.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return Redirect("~/UserView");
+            return RedirectToAction("Index");
         }
 
         public ActionResult Logout()
@@ -110,8 +117,8 @@ namespace WirtualnyDziennik.Controllers
                         SmtpClient smtp = new SmtpClient("smtp.gmail.com",587);
                         
                         smtp.EnableSsl = true;
-                        smtp.Credentials = new NetworkCredential("pomidor1992@gmail.com", "%6(e7GmaiL");
-                        MailAddress od = new MailAddress("pomidor1992@gmail.com");
+                        smtp.Credentials = new NetworkCredential("email google", "haslo");
+                        MailAddress od = new MailAddress("email google");
                             MailAddress Do = new MailAddress(model.email);
                             MailMessage s = new MailMessage(od,Do);
 

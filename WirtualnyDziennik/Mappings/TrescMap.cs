@@ -11,7 +11,7 @@ namespace WirtualnyDziennik.Mappings
     {
         public TrescMap()
         {
-            Id(x => x.id).GeneratedBy.Increment();/* SequenceIdentity("TRESC_ID_SEQ");*/
+            Id(x => x.id).GeneratedBy./*Increment();*/ SequenceIdentity("TRESC_ID_SEQ");
             Map(x => x.tytul);
             Map(x => x.tresc);
             Map(x => x.OD);

@@ -38,12 +38,13 @@ namespace WirtualnyDziennik.Controllers
             using (ISession session = NhibernateSession.OpenSession())
             {
                 List<TypTresci> jakas = session.Query<TypTresci>().ToList();
-                Tresc.ListaDostepnych = new List<System.Web.Mvc.SelectListItem>();
+                WirtualnyDziennik.Models.TypTresci.ListaDostepnych = new List<System.Web.Mvc.SelectListItem>();
                 for (int i = 0; i < jakas.Count(); i++)
                 {
                     SelectListItem Item = new SelectListItem();
                     Item.Text = jakas[i].nazwa;
-                    Tresc.ListaDostepnych.Add(Item);
+                    Item.Value = jakas[i].id.ToString();
+                    WirtualnyDziennik.Models.TypTresci.ListaDostepnych.Add(Item);
                 }
             }
 
@@ -68,6 +69,7 @@ namespace WirtualnyDziennik.Controllers
             }
             catch (Exception e)
             {
+                ViewBag.Message = e.Message + "##ZRODLO##" + e.Source + "##DALEJ##" + e.InnerException;
                 return View();
             }
         }
@@ -125,6 +127,7 @@ namespace WirtualnyDziennik.Controllers
                 {
                     SelectListItem Item = new SelectListItem();
                     Item.Text = jakas[i].nazwa;
+                    Item.Value = jakas[i].id.ToString();
                     Tresc.ListaDostepnych.Add(Item);
                 }
                 tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();

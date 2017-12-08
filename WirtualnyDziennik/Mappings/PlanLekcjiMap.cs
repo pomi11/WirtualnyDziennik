@@ -11,7 +11,7 @@ namespace WirtualnyDziennik.Mappings
     {
         public PlanLekcjiMap()
         {
-            Id(x => x.planlekcji_id).GeneratedBy.Increment();
+            Id(x => x.planlekcji_id).GeneratedBy./* Increment();*/SequenceIdentity("PLANLEKCJI_PLANLEKCJI_ID_SEQ");
             Map(x => x.data);
             References(x => x.Klasy);
             References(x => x.Przedmioty);

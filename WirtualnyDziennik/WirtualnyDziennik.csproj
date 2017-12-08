@@ -34,7 +34,7 @@
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -166,6 +166,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AutorTresciController.cs" />
     <Compile Include="Controllers\DziennikUczniaController.cs" />
+    <Compile Include="Controllers\GradeController.cs" />
     <Compile Include="Controllers\KlasaUczenController.cs" />
     <Compile Include="Controllers\PlanLekcjiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Mappings\UzytkownicyMap.cs" />
     <Compile Include="Models\AutorTresci.cs" />
     <Compile Include="Models\DziennikUcznia.cs" />
+    <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\KlasaUczen.cs" />
     <Compile Include="Models\Klasy.cs" />
@@ -266,6 +268,7 @@
     <Content Include="Views\Home\Remind.cshtml" />
     <Content Include="Views\Tresc\Message.cshtml" />
     <Content Include="Views\Tresc\Retrieve.cshtml" />
+    <Content Include="Views\Grade\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

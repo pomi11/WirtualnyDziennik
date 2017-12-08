@@ -11,7 +11,7 @@ namespace WirtualnyDziennik.Mappings
     {
         public UzytkownicyMap()
         {
-            Id(x => x.id).GeneratedBy.Increment();
+            Id(x => x.id).GeneratedBy./*Increment();*/SequenceIdentity("UZYTKOWNICY_ID_SEQ");
             Map(x => x.nazwa);
             Map(x => x.haslo);
             Map(x => x.email);
