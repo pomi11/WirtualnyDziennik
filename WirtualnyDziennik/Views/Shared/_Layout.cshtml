@@ -59,14 +59,21 @@
                         <li>@Html.ActionLink("Edytuj dane konta", "Edit","Uzytkownicy", new { id = Konto.UserId },null)</li>
                         <li>@Html.ActionLink("Wyślij wiadomość", "Message","Tresc")</li>
                         <li>@Html.ActionLink("Odebrane", "Retrieve","Tresc",new { id = Konto.UserId },null)</li>
-                        if (Konto.Typ !="ADMIN")
+                        if ((Konto.Typ == "UCZEN")||(Konto.Typ=="RODZIC"))
                         {
                         <li>@Html.ActionLink("Przeglądaj oceny", "Index","Grade", new { id = Konto.UserId }, null)</li>
-                        <li>@Html.ActionLink("Przeglądaj obecności", "Index")</li>
+                        <li>@Html.ActionLink("Przeglądaj obecności", "Index", "Attendance", new { id = Konto.UserId }, null)</li>
                         }
+
+                        if (Konto.Typ == "NAUCZYCIEL")
+                        {
+                            <li>@Html.ActionLink("Moje klasy", "Index", "Classes", new { id = Konto.UserId }, null)</li>
+                            <li>@Html.ActionLink("Utwórz ogłoszenie", "Create", "Tresc")</li>
+                        }
+
                         if (Konto.Typ == "ADMIN")
                         {
-                            <li>@Html.ActionLink("Edytuj Uzytkownikow", "Index")</li>
+                            <li>@Html.ActionLink("Edytuj Uzytkownikow", "Index","Uzytkownicy")</li>
                             <li>@Html.ActionLink("Edytuj Przedmioty", "Index")</li>
                             <li>@Html.ActionLink("Edytuj klasy", "Index")</li>
                             <li>@Html.ActionLink("Przypisz uczniow", "Index")</li>

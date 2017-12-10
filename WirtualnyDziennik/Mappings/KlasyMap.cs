@@ -13,7 +13,7 @@ namespace WirtualnyDziennik.Mappings
         {
             Id(x => x.id).GeneratedBy./* Increment();*/SequenceIdentity("KLASY_ID_SEQ");
             Map(x => x.nazwa);
-            References(x => x.Nauczyciel);
+            References(x => x.Wychowawca);
            // Map(x => x.Nauczyciel);
             Table("Klasy");
         }
