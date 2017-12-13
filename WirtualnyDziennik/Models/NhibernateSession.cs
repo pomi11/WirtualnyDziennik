@@ -17,7 +17,7 @@ namespace WirtualnyDziennik.Models
     {
         public static ISession OpenSession()
         {
-            String connectionString = "User ID=******;Password=*****;Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 212.33.90.213)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = XE)))";
+            String connectionString = "User ID=****;Password=****;Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 212.33.90.213)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = XE)))";
             ISessionFactory sessionFactory = Fluently.Configure()
                 .Database(OracleClientConfiguration.Oracle10.ConnectionString(connectionString)
                   .ConnectionString(connectionString)

@@ -265,7 +265,6 @@
     <Content Include="Views\Uzytkownicy\Edit.cshtml" />
     <Content Include="Views\Uzytkownicy\Index.cshtml" />
     <Content Include="Views\UserView\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutLeft.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Remind.cshtml" />
     <Content Include="Views\Tresc\Message.cshtml" />
