@@ -10,7 +10,7 @@ namespace WirtualnyDziennik.Models
         //public virtual int uzytkownik_id { get; set; }
       //  public virtual int klasa_id { get; set; }
         public virtual int klasauczen_id { get; set; }
-        public virtual Uzytkownicy Uzytkownicy { get; set; }
-        public virtual Klasy Klasy { get; set; }
+        public virtual Uzytkownicy Uzytkownik { get; set; }
+        public virtual Klasy Klasa { get; set; }
 }
 }

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WirtualnyDziennik.Models.Klasy>
+
+@{
+    var Konto = this.Session["UserProfile"] as WirtualnyDziennik.Models.UserProfileSessionData;
+
+    if (Konto.Typ == "ADMIN") { 
+<p>
+    <button onclick="location.href='@Url.Action("Create", "TypUzytkownika")'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj Przedmiot</button>
+</p>
+    }
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nazwa)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nazwa)
+            </td>
+            @if (Konto.Typ == "NAUCZYCIEL")
+            {
+                <td>
+                    <button onclick="location.href='@Url.Action("ClassesStudentList", "Classes", new { id = item.id } )'" type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit </button>
+                </td>
+            }
+        </tr>
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nazwa)
+            </td>
+            @if (Konto.Typ == "NAUCZYCIEL")
+            {
+                <td>
+                    <button onclick="location.href='@Url.Action("ListaLekcji", "Classes", new { id = item.id ,przedmiotid=ViewData["przedmiotid"]} )'" type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit </button>
+                </td>
+            }
+        </tr>
+    }
+
+</table>

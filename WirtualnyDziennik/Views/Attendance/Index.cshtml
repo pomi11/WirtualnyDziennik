@@ -1,9 +1,17 @@
 ﻿@model IList<Object[]> 
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayName("UCZEN")
-        </th>
+        @{var Konto = this.Session["UserProfile"] as WirtualnyDziennik.Models.UserProfileSessionData;
+            if (Konto.Typ == "RODZIC")
+            {
+                <th>
+                    @Html.DisplayName("IMIE")
+                </th>
+                <th>
+                    @Html.DisplayName("NAZWISKO")
+                </th>
+            }
+        }
         <th>
             @Html.DisplayName("OBECNOSC")
         </th>
@@ -21,14 +29,25 @@
 
             foreach (var item in Model)
             {
+                var i = 0;
                 <tr>
-                    <td>
-                        @Html.DisplayFor(model => item[0])
-                    </td>
+                    @{
+                        if (Konto.Typ == "RODZIC")
+                        {
+                            <td>
+                                @Html.DisplayFor(model => item[i])
+                            </td>
+                            i++;
+                            <td>
+                                @Html.DisplayFor(model => item[i])
+                            </td>
+                            i++;
+                        }
+                    }
                     <td>
                         
                       
-                        @switch(item[1].ToString())
+                        @switch(item[i].ToString())
                         {
                         case "0":
                         @Html.DisplayName("OBECNY");
@@ -42,10 +61,10 @@
                         }
                     </td>
                     <td>
-                        @Html.DisplayFor(model => item[2])
+                        @Html.DisplayFor(model => item[1+i])
                     </td>
                     <td>
-                        @Html.DisplayFor(model => item[3])
+                        @Html.DisplayFor(model => item[2+i])
                     </td>
                 </tr>
             }

@@ -13,8 +13,8 @@ namespace WirtualnyDziennik.Mappings
         {
             Id(x => x.planlekcji_id).GeneratedBy./* Increment();*/SequenceIdentity("PLANLEKCJI_PLANLEKCJI_ID_SEQ");
             Map(x => x.data);
-            References(x => x.Klasy);
-            References(x => x.Przedmioty);
+            References(x => x.Klasa);
+            References(x => x.Przedmiot);
             Table("PlanLekcji");
         }
     }

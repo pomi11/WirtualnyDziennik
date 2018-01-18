@@ -10,14 +10,25 @@ namespace WirtualnyDziennik.Controllers
 {
     public class KlasyController : Controller
     {
-        public ActionResult Index()
-        {
-            IList<Klasy> klasy;
-
+        public ActionResult Index(int id, int przedmiotid)
+        {           
+            List<Klasy> klasy = new List<Klasy>();
+            IList<Decimal> Lista;
+            ViewData["przedmiotid"] = przedmiotid;
             using (ISession session = NhibernateSession.OpenSession())
             {
-                klasy = session.Query<Klasy>().ToList();
+                var s = session.CreateSQLQuery("select k.id from planlekcji pl,przedmioty p,klasy k where pl.planlekcji_id=p.id and k.id=pl.klasa_id and p.id=" + id);
+
+                Lista = s.List<Decimal>();
+                for (int i = 0; i < Lista.Count(); i++)
+                {
+                    Klasy k = new Klasy();
+                    
+                    k = session.Get<Klasy>(Convert.ToInt32(Lista.ElementAt(i)));
+                    klasy.Add(k);
             }
+            }
+            
             return View(klasy);
         }
 

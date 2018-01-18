@@ -14,7 +14,11 @@ namespace WirtualnyDziennik.Models
         public virtual DateTime data { get; set; }
         public virtual int obecnosc { get; set; }
         public virtual float ocena { get; set; }
-        public virtual int typ_oceny { get; set; }
+        public virtual TypOceny TypOceny { get; set; }
+        public static List<System.Web.Mvc.SelectListItem> Obecnosci { get; set; }
+        public static List<System.Web.Mvc.SelectListItem> Oceny { get; set; }
+
+       
 
         public override bool Equals(object obj)
         {

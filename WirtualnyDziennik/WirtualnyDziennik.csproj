@@ -192,6 +192,7 @@
     <Compile Include="Mappings\PrzedmiotyMap.cs" />
     <Compile Include="Mappings\RodzicUczenMap.cs" />
     <Compile Include="Mappings\TrescMap.cs" />
+    <Compile Include="Mappings\TypOcenyMap.cs" />
     <Compile Include="Mappings\TypTresciMap.cs" />
     <Compile Include="Mappings\TypUzytkownikaMap.cs" />
     <Compile Include="Mappings\UzytkownicyMap.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Models\Przedmioty.cs" />
     <Compile Include="Models\RodzicUczen.cs" />
     <Compile Include="Models\Tresc.cs" />
+    <Compile Include="Models\TypOceny.cs" />
     <Compile Include="Models\TypTresci.cs" />
     <Compile Include="Models\TypUzytkownika.cs" />
     <Compile Include="Models\UserProfileSessionData.cs" />
@@ -273,14 +275,15 @@
     <Content Include="Views\Attendance\Index.cshtml" />
     <Content Include="Views\Classes\Index.cshtml" />
     <Content Include="Views\Classes\ClassesStudentList.cshtml" />
+    <Content Include="Views\Przedmioty\Index.cshtml" />
+    <Content Include="Views\Klasy\Index.cshtml" />
+    <Content Include="Views\DziennikUcznia\Index.cshtml" />
+    <Content Include="Views\Classes\ListaLekcji.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\AutorTresci\" />
-    <Folder Include="Views\DziennikUcznia\" />
     <Folder Include="Views\KlasaUczen\" />
-    <Folder Include="Views\Klasy\" />
-    <Folder Include="Views\Przedmioty\" />
     <Folder Include="Views\RodzicUczen\" />
   </ItemGroup>
   <ItemGroup>

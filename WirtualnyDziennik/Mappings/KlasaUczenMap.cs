@@ -12,8 +12,8 @@ namespace WirtualnyDziennik.Mappings
         public KlasaUczenMap()
         {
             Id(x => x.klasauczen_id).GeneratedBy./* Increment();*/SequenceIdentity("KLASAUCZEN_KLASAUCZEN_ID_SEQ");
-            References(x => x.Uzytkownicy);
-            References(x => x.Klasy);
+            References(x => x.Uzytkownik);
+            References(x => x.Klasa);
             Table("KlasaUczen");
         }
     }

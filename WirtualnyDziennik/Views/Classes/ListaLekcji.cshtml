@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WirtualnyDziennik.Models.PlanLekcji>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Data")
+        </th>
+        <th>
+            @Html.DisplayName("Lekcja")
+        </th>
+    </tr>
+    @{
+        if (Model != null)
+        {
+
+            foreach (var item in Model)
+            {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => item.data)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.planlekcji_id)
+        </td>
+
+        if (Konto.Typ == "NAUCZYCIEL")
+        {
+        <td>
+            <button onclick="location.href='@Url.Action("ClassesStudentList", "Classes", new { id = item.Klasa.id,planlekcjiid=item.planlekcji_id} )'" type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit </button>
+        </td>
+    </tr>
+            }
+
+        }
+    }
+    }
+
+</table>

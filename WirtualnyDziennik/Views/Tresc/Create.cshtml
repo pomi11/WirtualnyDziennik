@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Creating new type</h2>
+<h2>Tworzenie ogłoszenia</h2>
 
 
 @using (Html.BeginForm())
@@ -20,33 +20,30 @@
                 @Html.EditorFor(model => model.tytul, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.tytul, "", new { @class = "text-danger" })
             </div>
-        </div>
-        <div class="form-group">
             @Html.LabelFor(model => model.tresc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.tresc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.tresc,10,50, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.tresc, "", new { @class = "text-danger" })
             </div>
-        </div>
-        <!--<div class="form-group">
-            //@Html.LabelFor(model => model.TypTresci, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-              //  @Html.DropDownListFor(model => model.TypTresci.id, WirtualnyDziennik.Models.TypTresci.ListaDostepnych, new { htmlAttributes = new { @class = "form-control" } })
-               // @Html.ValidationMessageFor(model => model.TypTresci, "", new { @class = "text-danger" })
-            </div>
-        </div>-->
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Utwórz" class="btn btn-default" />
                 <p>@ViewBag.Message</p>
             </div>
+        </div>
+        <div class="form-group">
+           
+        </div>
+
+        
+        <div class="form-group">
+            
         </div>
     </div>  
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<!--<div>
+   // @Html.ActionLink("Back to List", "Index")
+</div>-->
 
 @section Scripts 
 {

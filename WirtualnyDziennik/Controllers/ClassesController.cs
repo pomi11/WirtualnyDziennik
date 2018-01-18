@@ -22,7 +22,7 @@ namespace WirtualnyDziennik.Controllers
             return View(kl);
         }
 
-        public ActionResult ClassesStudentList(int id)
+        public ActionResult ClassesStudentList(int id,int planlekcjiid)
         {
             UserProfileSessionData upsd = Session["UserProfile"] as UserProfileSessionData;
             IList<Object[]> lista;
@@ -30,8 +30,20 @@ namespace WirtualnyDziennik.Controllers
             using (ISession session = NhibernateSession.OpenSession())
             {
 
-                s = session.CreateSQLQuery("select u.imie, u.nazwisko from uzytkownicy u, klasauczen ku, klasy k where u.id = ku.uzytkownik_id and ku.klasa_id = k.id and k.id = " + id);
+                s = session.CreateSQLQuery("select u.id, u.imie, u.nazwisko from uzytkownicy u, klasauczen ku, klasy k where u.id = ku.uzytkownik_id and ku.klasa_id = k.id and k.id = " + id);
+                //U = session.Query<Uzytkownicy>().Where(c => c.id == session.Query<KlasaUczen>().Where(b => b.Klasy.id == session.Query<Klasy>().Where(a => a.Wychowawca.id == id).First().id).First().klasauczen_id).ToList();
                 lista = s.List<Object[]>();
+            }
+            ViewData["planlekcjiid"] = planlekcjiid;
+            return View(lista);
+        }
+        public ActionResult ListaLekcji(int id,int przedmiotid)
+        {
+            List<PlanLekcji> lista;
+            using (ISession session = NhibernateSession.OpenSession())
+            {
+
+                lista = session.Query<PlanLekcji>().Where(b => b.Klasa.id == id).Where(b=>b.Przedmiot.id==przedmiotid).ToList();
             }
             return View(lista);
         }

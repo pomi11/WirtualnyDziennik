@@ -16,7 +16,7 @@ namespace WirtualnyDziennik.Controllers
 
             using (ISession session = NhibernateSession.OpenSession())
             {
-                tresc = session.Query<Tresc>().ToList();
+                tresc = session.Query<Tresc>().Where(b => b.TypTresci.id==1).ToList();
             }
             
             return View(tresc);
@@ -34,10 +34,10 @@ namespace WirtualnyDziennik.Controllers
         }
 
         public ActionResult Create()
-        {
+        {/*
             using (ISession session = NhibernateSession.OpenSession())
             {
-                List<TypTresci> jakas = session.Query<TypTresci>().ToList();
+               /* List<TypTresci> jakas = session.Query<TypTresci>().ToList();
                 WirtualnyDziennik.Models.TypTresci.ListaDostepnych = new List<System.Web.Mvc.SelectListItem>();
                 for (int i = 0; i < jakas.Count(); i++)
                 {
@@ -46,7 +46,7 @@ namespace WirtualnyDziennik.Controllers
                     Item.Value = jakas[i].id.ToString();
                     WirtualnyDziennik.Models.TypTresci.ListaDostepnych.Add(Item);
                 }
-            }
+            }*/
 
             return View();
         }
@@ -54,11 +54,13 @@ namespace WirtualnyDziennik.Controllers
         [HttpPost]
         public ActionResult Create(Tresc model)
         {
+            
             try
             {
+
                 using (ISession session = NhibernateSession.OpenSession())
                 {
-
+                    model.TypTresci = (TypTresci)session.Load("TypTresci", 1);
                     using (ITransaction transaction = session.BeginTransaction())
                     {
                         session.Save(model);
@@ -128,7 +130,7 @@ namespace WirtualnyDziennik.Controllers
                     SelectListItem Item = new SelectListItem();
                     Item.Text = jakas[i].nazwa;
                     Item.Value = jakas[i].id.ToString();
-                    Tresc.ListaDostepnych.Add(Item);
+                    TypTresci.ListaDostepnych.Add(Item);
                 }
                 tresc = session.Query<Tresc>().Where(b => b.id == id).FirstOrDefault();
             }

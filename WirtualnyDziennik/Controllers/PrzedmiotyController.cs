@@ -10,13 +10,14 @@ namespace WirtualnyDziennik.Controllers
 {
     public class PrzedmiotyController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
             List<Przedmioty> Przedmioty;
 
             using (ISession session = NhibernateSession.OpenSession())
             {
-                Przedmioty = session.Query<Przedmioty>().ToList();
+                Przedmioty = session.Query<Przedmioty>().Where(b=>b.Nauczyciel.id==id).ToList();
+                ViewData["nauczycielid"] = id;
             }
 
             return View(Przedmioty);
