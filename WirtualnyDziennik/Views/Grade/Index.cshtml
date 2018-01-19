@@ -1,71 +1,74 @@
 ﻿@model IList<Object[]> 
-<table class="table">
-    <tr>
-        @{var Konto = this.Session["UserProfile"] as WirtualnyDziennik.Models.UserProfileSessionData;
+
+<div class="col-md-11" >
+    <table class="table">
+        <tr>
+            @{var Konto = this.Session["UserProfile"] as WirtualnyDziennik.Models.UserProfileSessionData;
             if (Konto.Typ == "RODZIC")
             {
-        <th>
-            @Html.DisplayName("IMIE")
-        </th>
-        <th>
-            @Html.DisplayName("NAZWISKO")
-        </th>
+                    <th>
+                        @Html.DisplayName("IMIE")
+                    </th>
+                    <th>
+                        @Html.DisplayName("NAZWISKO")
+                    </th>
                 }
             }
-        <th>
-            @Html.DisplayName("OCENA")
-        </th>
-        <th>
-            @Html.DisplayName("PRZEDMIOT")
-        </th>
-        <th>
-            @Html.DisplayName("TYP OCENY")
-        </th>
-        <th>
-            @Html.DisplayName("DATA")
-        </th>
-    </tr>
-    @{
+            <th>
+                @Html.DisplayName("OCENA")
+            </th>
+            <th>
+                @Html.DisplayName("PRZEDMIOT")
+            </th>
+            <th>
+                @Html.DisplayName("TYP OCENY")
+            </th>
+            <th>
+                @Html.DisplayName("DATA")
+            </th>
+        </tr>
+        @{
 
-        if (Model != null)
-        {
-
-            foreach (var item in Model)
+            if (Model != null)
             {
-                var i = 0;
-                <tr>
-                   @{  
-                       if (Konto.Typ == "RODZIC")
-                       {
-                        <th>
-                            @Html.DisplayFor(model => item[i])
-                        </th>
-                           i++;
-                        <th>
-                           @Html.DisplayFor(model => item[i])
-                         </th>
-                           i++;
-                       }
-                }
-                    
-                    <td>
-                        @Html.DisplayFor(model =>item[i])
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => item[1+i])
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => item[2+i])
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => item[3 + i])
-                    </td>
-                </tr>
-            }
 
+                foreach (var item in Model)
+                {
+                    var i = 0;
+                    <tr>
+                        @{
+                            if (Konto.Typ == "RODZIC")
+                            {
+                                <th>
+                                    @Html.DisplayFor(model => item[i])
+                                </th>
+                                i++;
+                                <th>
+                                    @Html.DisplayFor(model => item[i])
+                                </th>
+                                i++;
+                            }
+                        }
+
+                        <td>
+                            @Html.DisplayFor(model => item[i])
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item[1 + i])
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item[2 + i])
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item[3 + i])
+                        </td>
+                    </tr>
+                                }
+
+                            }
         }
-    }
-</table>
+    </table>
+</div>
 
 
 

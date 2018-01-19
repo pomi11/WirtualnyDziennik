@@ -15,8 +15,9 @@
         
 
         <div class="form-group">
-            @Html.Label("Wybierz uzytkownika")
+            
             <div class="col-md-10">
+                @Html.Label("Wybierz uzytkownika")
                 @Html.DropDownListFor(model => model.uczen.id, WirtualnyDziennik.Models.Przedmioty.ListaDostepnychNauczycieli, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.uczen.id, "", new { @class = "text-danger" })
             </div>

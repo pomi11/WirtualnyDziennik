@@ -34,7 +34,7 @@
           
         </div>
     </div>
-    <div id="left" class="panel-body navbar-inverse navbar-left " style="background-color:#2e2e2e;">
+    <div id="left" class="panel-body navbar-inverse navbar-left col-md-2" style="background-color:#2e2e2e;">
         <!--<div class="container">-->
             
                 <ul class="nav">
@@ -44,18 +44,19 @@
                            @using (Html.BeginForm("Login", "Home"))
                             {
                                 <br /><h5 class="text-center" style="color: #428bca;">LOGIN</h5>
-                                <input type="text" class ="left input-sm " name="login" id="login" />
-                              <br /><h5 class="text-center" style="color: #428bca;">HASŁO</h5><input type="password" class="left input-sm" name="haslo" id="haslo" />
+                                <input type="text" class ="col-md-12 input-sm " name="login" id="login" />
+                              <br /><h5 class="text-center" style="color: #428bca;">HASŁO</h5>
+                           <input type="password" class="col-md-12 input-sm" name="haslo" id="haslo" />
                                <br />
-                           <br /><input type="submit" class="btn-link left  navbar-inverse" name="Loguj" value="Loguj" />
+                           <br /><input type="submit" class="col-md-12 btn-link navbar-inverse" name="Loguj" value="Loguj" />
                              }
                           @using (Html.BeginForm("Register", "Home",FormMethod.Get))
                            {
-                               <input  class="btn-link left  navbar-inverse" type="submit" value="Rejestracja"/>
+                               <input  class="col-md-12 btn-link  navbar-inverse" type="submit" value="Rejestracja"/>
                            }
                           @using (Html.BeginForm("Remind", "Home", FormMethod.Get))
                            {
-                               <input class="btn-link left  navbar-inverse" type="submit" value="Przypomnienie hasła" />
+                               <input class="col-md-12 btn-link navbar-inverse" type="submit" value="Przypomnienie hasła" />
                            }
                            <br />
                            <br />
@@ -98,13 +99,13 @@
                    </ul>
         <!--</div>-->
     </div>
-    <div class="container body-content">
+    <div class="container body-content col-md-10">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year — moja aplikacja platformy ASP.NET</p>
-        </footer>
+        <br />
     </div>
+        
+    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
