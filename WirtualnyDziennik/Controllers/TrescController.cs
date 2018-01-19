@@ -188,7 +188,7 @@ namespace WirtualnyDziennik.Controllers
                 Lista= session.Query<Tresc>().ToList();
             }
            // ViewBag.SubmitAction = "Confirm delete";
-            return View("Retrieve",Lista);
+            return RedirectToAction("Index","Tresc");
         }
 
       /*  [HttpPost]

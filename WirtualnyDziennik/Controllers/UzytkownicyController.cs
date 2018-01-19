@@ -122,7 +122,7 @@ namespace WirtualnyDziennik.Controllers
                         transaction.Commit();
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
             catch
             {
