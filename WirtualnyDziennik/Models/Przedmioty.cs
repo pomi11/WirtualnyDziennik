@@ -10,5 +10,6 @@ namespace WirtualnyDziennik.Models
         public virtual int id { get; set; }
         public virtual String nazwa { get; set; }
         public virtual Uzytkownicy Nauczyciel { get; set; } // trzeba dodać jakieś ograniczenie, że tylko TYP UZYTKOWNIKA=NAUCZYCIEL
+        public static List<System.Web.Mvc.SelectListItem> ListaDostepnychNauczycieli { get; set; }
     }
 }

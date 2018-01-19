@@ -71,7 +71,7 @@ namespace WirtualnyDziennik.Controllers
                         transaction.Commit();
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { iducznia = iducznia, planlekcjiid = planlekcjiid });
             }
             catch (Exception e)
             {

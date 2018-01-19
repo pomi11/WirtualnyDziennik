@@ -26,9 +26,27 @@ namespace WirtualnyDziennik.Controllers
                     
                     k = session.Get<Klasy>(Convert.ToInt32(Lista.ElementAt(i)));
                     klasy.Add(k);
-            }
+                }
             }
             
+            return View(klasy);
+        }
+
+        public ActionResult IndexAdmin()
+        {
+            List<Klasy> klasy;
+            List<String> nazwiska = new List<String>();
+           
+           
+            using (ISession session = NhibernateSession.OpenSession())
+            {
+                klasy = session.Query<Klasy>().ToList();                
+                for(int i = 0;i<klasy.Count();i++)
+                {
+                    nazwiska.Add(klasy[i].Wychowawca.nazwisko);
+                }
+            }
+
             return View(klasy);
         }
 
@@ -45,36 +63,79 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Create()
         {
-            /* Klasy klasy = new Klasy();
              using (ISession session = NhibernateSession.OpenSession())
              {
+                List<Uzytkownicy> jakas = session.Query<Uzytkownicy>().Where(c => c.typu.id == 3).ToList();
+                WirtualnyDziennik.Models.Przedmioty.ListaDostepnychNauczycieli = new List<System.Web.Mvc.SelectListItem>();
+                for (int i = 0; i < jakas.Count(); i++)
+                {
+                    SelectListItem Item = new SelectListItem();
+                    Item.Text = jakas[i].nazwa;
+                    Item.Value = jakas[i].id.ToString();
+                    Przedmioty.ListaDostepnychNauczycieli.Add(Item);
+                }
+            }
 
-                 using (ITransaction transaction = session.BeginTransaction())   
-                 {
-                     session.Save(klasy);
-                     transaction.Commit();  
-                 }
-             }*/
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(String nazwa)
+        public ActionResult Create(Klasy model)
         {
             try
             {
-                Klasy klasy = new Klasy();
-                klasy.nazwa = nazwa;
                 using (ISession session = NhibernateSession.OpenSession())
                 {
 
                     using (ITransaction transaction = session.BeginTransaction())
                     {
-                        session.Save(klasy);
+                        session.Save(model);
                         transaction.Commit();
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAdmin");
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+        }
+        public ActionResult Add(int id)
+        {
+            using (ISession session = NhibernateSession.OpenSession())
+            {
+               
+                List<Uzytkownicy> jakas = session.Query<Uzytkownicy>().Where(c => c.typu.id == 2).ToList();
+                WirtualnyDziennik.Models.Przedmioty.ListaDostepnychNauczycieli = new List<System.Web.Mvc.SelectListItem>();
+                for (int i = 0; i < jakas.Count(); i++)
+                {
+                    SelectListItem Item = new SelectListItem();
+                    Item.Text = jakas[i].nazwisko;
+                    Item.Value = jakas[i].id.ToString();
+                    Przedmioty.ListaDostepnychNauczycieli.Add(Item);
+                }
+                ViewData["klasa"] = id;
+                ViewBag.SubmitAction = "Save";
+            }
+            return View();
+        }
+[HttpPost]
+ public ActionResult Add(KlasaUczen model)
+        {
+            KlasaUczen ku= new KlasaUczen();
+            
+           
+            try
+            {
+                using (ISession session = NhibernateSession.OpenSession())
+                {
+                    using (ITransaction transaction = session.BeginTransaction())
+                    {
+                        session.Save(model);
+                        transaction.Commit();
+                    }
+                }
+                return RedirectToAction("IndexAdmin");
             }
             catch (Exception e)
             {
@@ -82,11 +143,43 @@ namespace WirtualnyDziennik.Controllers
             }
         }
 
+public ActionResult EditStudents(int id)
+        {
+            Klasy klasy = new Klasy();
+            using (ISession session = NhibernateSession.OpenSession())
+            {
+                List<KlasaUczen> klasauczen = session.Query<KlasaUczen>().Where(b => b.Klasa.id == id).ToList();
+                IList<Object[]> s = session.CreateSQLQuery("select  u.* from uzytkownicy u,klasauczen where u.id=klasauczen.uzytkownik_id and klasauczen.klasa_id=" + id).List<Object[]>();
+                List<Uzytkownicy> jakas = session.Query<Uzytkownicy>().Where(c => c.typu.id == 3).ToList();
+                WirtualnyDziennik.Models.Przedmioty.ListaDostepnychNauczycieli = new List<System.Web.Mvc.SelectListItem>();
+                for (int i = 0; i < s.Count(); i++)
+                {
+                    SelectListItem Item = new SelectListItem();
+                    Item.Text = s[i][1].ToString();
+                    Item.Value = s[i][0].ToString();
+                    Przedmioty.ListaDostepnychNauczycieli.Add(Item);
+                }
+                klasy = session.Query<Klasy>().Where(b => b.id == id).FirstOrDefault();
+            }
+            ViewData["klasa"] = id;
+            ViewBag.SubmitAction = "Save";
+            return View(klasy);
+        }
+
         public ActionResult Edit(int id)
         {
             Klasy klasy = new Klasy();
             using (ISession session = NhibernateSession.OpenSession())
             {
+                List<Uzytkownicy> jakas = session.Query<Uzytkownicy>().Where(c => c.typu.id == 3).ToList();
+                WirtualnyDziennik.Models.Przedmioty.ListaDostepnychNauczycieli = new List<System.Web.Mvc.SelectListItem>();
+                for (int i = 0; i < jakas.Count(); i++)
+                {
+                    SelectListItem Item = new SelectListItem();
+                    Item.Text = jakas[i].nazwa;
+                    Item.Value = jakas[i].id.ToString();
+                    Przedmioty.ListaDostepnychNauczycieli.Add(Item);
+                }
                 klasy = session.Query<Klasy>().Where(b => b.id == id).FirstOrDefault();
             }
 

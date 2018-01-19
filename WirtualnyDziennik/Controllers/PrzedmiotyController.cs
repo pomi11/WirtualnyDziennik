@@ -22,6 +22,25 @@ namespace WirtualnyDziennik.Controllers
 
             return View(Przedmioty);
         }
+        public ActionResult IndexAdmin()
+        {
+            IList<Przedmioty> tresc;
+            using (ISession session = NhibernateSession.OpenSession())
+            {
+                List<Uzytkownicy> jakas = session.Query<Uzytkownicy>().Where(c => c.typu.id == 3).ToList();
+                WirtualnyDziennik.Models.Przedmioty.ListaDostepnychNauczycieli = new List<System.Web.Mvc.SelectListItem>();
+                for (int i = 0; i < jakas.Count(); i++)
+                {
+                    SelectListItem Item = new SelectListItem();
+                    Item.Text = jakas[i].nazwa;
+                    Item.Value = jakas[i].id.ToString();
+                    Przedmioty.ListaDostepnychNauczycieli.Add(Item);
+                }
+                tresc = session.Query<Przedmioty>().ToList();
+
+            }
+            return View(tresc); 
+        }
 
         public ActionResult Details(int id)
         {
@@ -36,6 +55,21 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Create()
         {
+            IList<Przedmioty> tresc;
+            using (ISession session = NhibernateSession.OpenSession())
+            {
+                List<Uzytkownicy> jakas = session.Query<Uzytkownicy>().Where(c => c.typu.id == 3).ToList();
+                WirtualnyDziennik.Models.Przedmioty.ListaDostepnychNauczycieli = new List<System.Web.Mvc.SelectListItem>();
+                for (int i = 0; i < jakas.Count(); i++)
+                {
+                    SelectListItem Item = new SelectListItem();
+                    Item.Text = jakas[i].nazwa;
+                    Item.Value = jakas[i].id.ToString();
+                    Przedmioty.ListaDostepnychNauczycieli.Add(Item);
+                }
+                tresc = session.Query<Przedmioty>().ToList();
+
+            }
             return View();
         }
 
@@ -53,7 +87,7 @@ namespace WirtualnyDziennik.Controllers
                         transaction.Commit();
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAdmin");
             }
             catch (Exception e)
             {
@@ -89,7 +123,7 @@ namespace WirtualnyDziennik.Controllers
                         transaction.Commit();
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAdmin");
             }
             catch
             {
@@ -123,7 +157,7 @@ namespace WirtualnyDziennik.Controllers
                         trans.Commit();
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAdmin");
             }
             catch (Exception e)
             {

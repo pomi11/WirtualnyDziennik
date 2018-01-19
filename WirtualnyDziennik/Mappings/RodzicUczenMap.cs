@@ -11,8 +11,8 @@ namespace WirtualnyDziennik.Mappings
         public RodzicUczenMap()
         {
             CompositeId().
-        KeyReference(x => x.rodzic, "rodzic").
-        KeyReference(x => x.uczen, "uczen");
+        KeyReference(x => x.rodzic, "rodzic_id").
+        KeyReference(x => x.uczen, "uczen_id");
             //  References(x => x.rodzic);
             //   References(x => x.uczen);
             Table("RodzicUczen");

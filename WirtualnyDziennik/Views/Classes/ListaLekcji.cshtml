@@ -1,4 +1,16 @@
 ﻿@model IEnumerable<WirtualnyDziennik.Models.PlanLekcji>
+
+@{
+        var Konto = this.Session["UserProfile"] as WirtualnyDziennik.Models.UserProfileSessionData;
+    }
+ @if (Konto.Typ == "NAUCZYCIEL")
+    {
+        <p>
+            <button onclick="location.href='@Url.Action("Create", "PlanLekcji")'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj Lekcję</button>
+        </p>
+    }
+
+
 <table class="table">
     <tr>
         <th>
@@ -14,24 +26,25 @@
 
             foreach (var item in Model)
             {
-    <tr>
-        <td>
-            @Html.DisplayFor(model => item.data)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.planlekcji_id)
-        </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.planlekcji_id)
+                    </td>
 
-        if (Konto.Typ == "NAUCZYCIEL")
-        {
-        <td>
-            <button onclick="location.href='@Url.Action("ClassesStudentList", "Classes", new { id = item.Klasa.id,planlekcjiid=item.planlekcji_id} )'" type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit </button>
-        </td>
-    </tr>
+                    @if (Konto.Typ == "NAUCZYCIEL")
+                    {
+                    <td>
+                        <button onclick="location.href='@Url.Action("ClassesStudentList", "Classes", new { id = item.Klasa.id, planlekcjiid = item.planlekcji_id })'" type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edytuj </button>
+                    </td>
+                    }
+                </tr>
             }
 
         }
     }
-    }
+    
 
 </table>

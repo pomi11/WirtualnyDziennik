@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WirtualnyDziennik.Models.Przedmioty>
+<p>
+    <button onclick="location.href='@Url.Action("Create", "Przedmioty")'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nowy Przedmiot</button>
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nazwa)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nazwa)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("Edit", "Przedmioty", new { id = item.id } )'" type="button" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit </button>
+                <button onclick="location.href='@Url.Action("Details", "Przedmioty", new { id = item.id })'" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Details </button>
+                <button onclick="location.href='@Url.Action("Delete", "Przedmioty", new { id = item.id })'" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete </button>
+            </td>
+           
+        </tr>
+    }
+
+</table>

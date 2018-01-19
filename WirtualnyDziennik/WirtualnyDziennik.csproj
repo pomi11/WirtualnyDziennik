@@ -279,12 +279,22 @@
     <Content Include="Views\Klasy\Index.cshtml" />
     <Content Include="Views\DziennikUcznia\Index.cshtml" />
     <Content Include="Views\Classes\ListaLekcji.cshtml" />
+    <Content Include="Views\Przedmioty\Edit.cshtml" />
+    <Content Include="Views\Przedmioty\IndexAdmin.cshtml" />
+    <Content Include="Views\Przedmioty\Create.cshtml" />
+    <Content Include="Views\Klasy\IndexAdmin.cshtml" />
+    <Content Include="Views\Klasy\Edit.cshtml" />
+    <Content Include="Views\Klasy\Create.cshtml" />
+    <Content Include="Views\Klasy\Details.cshtml" />
+    <Content Include="Views\Klasy\EditStudents.cshtml" />
+    <Content Include="Views\Klasy\Add.cshtml" />
+    <Content Include="Views\RodzicUczen\Index.cshtml" />
+    <Content Include="Views\RodzicUczen\PrzypiszUcznia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\AutorTresci\" />
     <Folder Include="Views\KlasaUczen\" />
-    <Folder Include="Views\RodzicUczen\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
