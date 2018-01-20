@@ -118,7 +118,7 @@ namespace WirtualnyDziennik.Controllers
                         SmtpClient smtp = new SmtpClient("smtp.gmail.com",587);
                         
                         smtp.EnableSsl = true;
-                        smtp.Credentials = new NetworkCredential("wirtualnydziennik1@gmail.com", "WirtualnyDziennik");
+                        smtp.Credentials = new NetworkCredential("wirtualnydziennik1@gmail.com", "******");
                         MailAddress od = new MailAddress("wirtualnydziennik1@gmail.com");
                             MailAddress Do = new MailAddress(model.email);
                             MailMessage s = new MailMessage(od,Do);
