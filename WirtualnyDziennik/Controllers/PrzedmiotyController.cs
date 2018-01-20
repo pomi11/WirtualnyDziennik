@@ -12,6 +12,10 @@ namespace WirtualnyDziennik.Controllers
     {
         public ActionResult Index(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             List<Przedmioty> Przedmioty;
 
             using (ISession session = NhibernateSession.OpenSession())
@@ -24,6 +28,10 @@ namespace WirtualnyDziennik.Controllers
         }
         public ActionResult IndexAdmin()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             IList<Przedmioty> tresc;
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -44,6 +52,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Details(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Przedmioty Przedmioty = new Przedmioty();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -55,6 +67,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Create()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             IList<Przedmioty> tresc;
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -76,6 +92,10 @@ namespace WirtualnyDziennik.Controllers
         [HttpPost]
         public ActionResult Create(Przedmioty model)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())
@@ -97,6 +117,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Edit(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Przedmioty Przedmioty = new Przedmioty();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -110,6 +134,10 @@ namespace WirtualnyDziennik.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Przedmioty model)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())
@@ -133,6 +161,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Delete(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Przedmioty Przedmioty = new Przedmioty();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -145,6 +177,10 @@ namespace WirtualnyDziennik.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())

@@ -1,11 +1,11 @@
 ﻿@model IList<Object[]> 
 
-<div class="col-md-11" >
+<div class="col-md-11">
     <table class="table">
         <tr>
             @{var Konto = this.Session["UserProfile"] as WirtualnyDziennik.Models.UserProfileSessionData;
-            if (Konto.Typ == "RODZIC")
-            {
+                if (Konto.Typ == "RODZIC")
+                {
                     <th>
                         @Html.DisplayName("IMIE")
                     </th>
@@ -63,11 +63,14 @@
                             @Html.DisplayFor(model => item[3 + i])
                         </td>
                     </tr>
-                                }
+                }
 
-                            }
+            }
         }
     </table>
+
+    <!--<input id="from" type="date" />
+    <input id="to" type="date" />-->
 </div>
 
 

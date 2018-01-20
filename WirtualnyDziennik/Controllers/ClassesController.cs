@@ -13,6 +13,10 @@ namespace WirtualnyDziennik.Controllers
         // GET: Classes
         public ActionResult Index(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             List<Klasy> kl;
 
             using (ISession session = NhibernateSession.OpenSession())
@@ -24,6 +28,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult ClassesStudentList(int id,int planlekcjiid)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             UserProfileSessionData upsd = Session["UserProfile"] as UserProfileSessionData;
             IList<Object[]> lista;
             IQuery s = null;
@@ -39,13 +47,20 @@ namespace WirtualnyDziennik.Controllers
         }
         public ActionResult ListaLekcji(int id,int przedmiotid)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             List<PlanLekcji> lista;
             using (ISession session = NhibernateSession.OpenSession())
             {
 
                 lista = session.Query<PlanLekcji>().Where(b => b.Klasa.id == id).Where(b=>b.Przedmiot.id==przedmiotid).ToList();
             }
+            ViewData["przedmiotid"] = przedmiotid;
+            ViewData["klasaid"] = id;
             return View(lista);
         }
+   
     }
 }

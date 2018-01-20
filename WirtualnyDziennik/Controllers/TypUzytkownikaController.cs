@@ -12,6 +12,10 @@ namespace WirtualnyDziennik.Controllers
     {
         public ActionResult Index()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             IList<TypUzytkownika> TUzytkownik;
 
             using (ISession session = NhibernateSession.OpenSession())
@@ -23,6 +27,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Details(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             TypUzytkownika TUzytkownik = new TypUzytkownika();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -34,6 +42,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Create()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             /* TypTresci TTresc = new TypTresci();
              using (ISession session = NhibernateSession.OpenSession())
              {
@@ -50,6 +62,10 @@ namespace WirtualnyDziennik.Controllers
         [HttpPost]
         public ActionResult Create(String nazwa)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                TypUzytkownika TUzytkownik = new TypUzytkownika();
@@ -73,6 +89,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Edit(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             TypUzytkownika TUzytkownik = new TypUzytkownika();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -86,6 +106,10 @@ namespace WirtualnyDziennik.Controllers
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 TypUzytkownika TUzytkownik = new TypUzytkownika();
@@ -109,6 +133,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Delete(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             TypUzytkownika TUzytkownik = new TypUzytkownika();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -121,6 +149,10 @@ namespace WirtualnyDziennik.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +12,7 @@ namespace WirtualnyDziennik.Models
         public virtual KlasaUczen KlasaUczen { get; set; }
         public virtual PlanLekcji PlanLekcji { get; set; }
         //public virtual int planlekcji_id { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public virtual DateTime data { get; set; }
         public virtual int obecnosc { get; set; }
         public virtual float ocena { get; set; }

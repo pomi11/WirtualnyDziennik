@@ -15,6 +15,7 @@ namespace WirtualnyDziennik.Controllers
     {
         public ActionResult Index()
         {
+
             List<Tresc> lista = new List<Tresc>();
             using (ISession session = NhibernateSession.OpenSession())
             {

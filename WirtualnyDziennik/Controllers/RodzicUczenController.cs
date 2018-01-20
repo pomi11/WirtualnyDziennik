@@ -13,6 +13,10 @@ namespace WirtualnyDziennik.Controllers
         // GET: RodzicUczen
         public ActionResult Index()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             List<Uzytkownicy> rodzice;
 
             using (ISession session = NhibernateSession.OpenSession())
@@ -25,7 +29,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult PrzypiszUcznia(int id)
         {
-                     
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             using (ISession session = NhibernateSession.OpenSession())
             {
                 List<Uzytkownicy> jakas = session.Query<Uzytkownicy>().Where(c => c.typu.id == 2).ToList();
@@ -46,7 +53,10 @@ namespace WirtualnyDziennik.Controllers
         [HttpPost]
         public ActionResult PrzypiszUcznia(RodzicUczen model)
         {
-
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())

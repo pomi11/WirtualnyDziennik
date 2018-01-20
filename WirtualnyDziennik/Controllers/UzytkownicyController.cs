@@ -12,6 +12,10 @@ namespace WirtualnyDziennik.Controllers
     {
         public ActionResult Index()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             List<Uzytkownicy> Uzytkownicy;
 
             using (ISession session = NhibernateSession.OpenSession())
@@ -24,6 +28,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Details(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Uzytkownicy Uzytkownicy = new Uzytkownicy();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -35,6 +43,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Create()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             using (ISession session = NhibernateSession.OpenSession())
             {
                 List<TypUzytkownika> jakas = session.Query<TypUzytkownika>().ToList();
@@ -52,7 +64,11 @@ namespace WirtualnyDziennik.Controllers
 
         [HttpPost]
         public ActionResult Create(Uzytkownicy model)
-                  {             
+                  {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 
@@ -75,6 +91,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Edit(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Uzytkownicy Uzytkownicy = new Uzytkownicy();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -97,6 +117,10 @@ namespace WirtualnyDziennik.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Uzytkownicy model)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())
@@ -132,6 +156,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Delete(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Uzytkownicy Uzytkownicy = new Uzytkownicy();
             List<Uzytkownicy> Lista = new List<Uzytkownicy>();
             using (ISession session = NhibernateSession.OpenSession())

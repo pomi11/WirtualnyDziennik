@@ -11,7 +11,11 @@ namespace WirtualnyDziennik.Controllers
     public class KlasyController : Controller
     {
         public ActionResult Index(int id, int przedmiotid)
-        {           
+        {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             List<Klasy> klasy = new List<Klasy>();
             IList<Decimal> Lista;
             ViewData["przedmiotid"] = przedmiotid;
@@ -34,6 +38,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult IndexAdmin()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             List<Klasy> klasy;
             List<String> nazwiska = new List<String>();
            
@@ -52,6 +60,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Details(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Klasy klasy = new Klasy();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -63,7 +75,11 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Create()
         {
-             using (ISession session = NhibernateSession.OpenSession())
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            using (ISession session = NhibernateSession.OpenSession())
              {
                 List<Uzytkownicy> jakas = session.Query<Uzytkownicy>().Where(c => c.typu.id == 3).ToList();
                 WirtualnyDziennik.Models.Przedmioty.ListaDostepnychNauczycieli = new List<System.Web.Mvc.SelectListItem>();
@@ -82,6 +98,10 @@ namespace WirtualnyDziennik.Controllers
         [HttpPost]
         public ActionResult Create(Klasy model)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())
@@ -102,6 +122,10 @@ namespace WirtualnyDziennik.Controllers
         }
         public ActionResult Add(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             using (ISession session = NhibernateSession.OpenSession())
             {
                
@@ -122,6 +146,10 @@ namespace WirtualnyDziennik.Controllers
 [HttpPost]
  public ActionResult Add(KlasaUczen model)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             KlasaUczen ku= new KlasaUczen();
             
            
@@ -145,6 +173,10 @@ namespace WirtualnyDziennik.Controllers
 
 public ActionResult EditStudents(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Klasy klasy = new Klasy();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -168,6 +200,10 @@ public ActionResult EditStudents(int id)
 
         public ActionResult Edit(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Klasy klasy = new Klasy();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -190,6 +226,10 @@ public ActionResult EditStudents(int id)
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 Klasy klasy = new Klasy();
@@ -213,6 +253,10 @@ public ActionResult EditStudents(int id)
 
         public ActionResult Delete(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Klasy klasy = new Klasy();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -225,6 +269,10 @@ public ActionResult EditStudents(int id)
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())

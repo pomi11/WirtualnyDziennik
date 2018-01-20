@@ -13,6 +13,10 @@ namespace WirtualnyDziennik.Controllers
         // GET: KlasaUczen
         public ActionResult Index()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -23,6 +27,10 @@ namespace WirtualnyDziennik.Controllers
         //[HttpPost]
         public ActionResult DeleteStudent(int id, FormCollection collection)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             int id2;
             try
             {

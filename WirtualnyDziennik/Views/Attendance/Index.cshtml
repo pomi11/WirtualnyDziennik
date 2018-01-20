@@ -1,7 +1,8 @@
 ﻿@model IList<Object[]> 
 <table class="table">
     <tr>
-        @{var Konto = this.Session["UserProfile"] as WirtualnyDziennik.Models.UserProfileSessionData;
+
+        @{ var Konto = this.Session["UserProfile"] as WirtualnyDziennik.Models.UserProfileSessionData;
             if (Konto.Typ == "RODZIC")
             {
                 <th>
@@ -11,6 +12,7 @@
                     @Html.DisplayName("NAZWISKO")
                 </th>
             }
+
         }
         <th>
             @Html.DisplayName("OBECNOSC")

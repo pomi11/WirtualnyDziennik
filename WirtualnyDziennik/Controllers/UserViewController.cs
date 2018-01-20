@@ -11,6 +11,10 @@ namespace WirtualnyDziennik.Controllers
         // GET: UserView
         public ActionResult Index()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
     }

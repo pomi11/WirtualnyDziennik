@@ -6,7 +6,7 @@
  @if (Konto.Typ == "NAUCZYCIEL")
     {
         <p>
-            <button onclick="location.href='@Url.Action("Create", "PlanLekcji")'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj Lekcję</button>
+            <button onclick="location.href='@Url.Action("Create", "PlanLekcji", new { klasaid = ViewData["klasaid"], przedmiotid = ViewData["przedmiotid"] })'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Dodaj Lekcję</button>
         </p>
     }
 

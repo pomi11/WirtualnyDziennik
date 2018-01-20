@@ -13,6 +13,10 @@ namespace WirtualnyDziennik.Controllers
         // GET: DziennikUcznia
         public ActionResult Index(int iducznia,int planlekcjiid)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             using (ISession session = NhibernateSession.OpenSession())
             {
                 DziennikUcznia.Obecnosci = new List<SelectListItem>();
@@ -50,14 +54,21 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Insert(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult Index(int iducznia,int planlekcjiid,DziennikUcznia model)
         {
-          
-            
+
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())

@@ -12,6 +12,10 @@ namespace WirtualnyDziennik.Controllers
     {
         public ActionResult Index()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             List<Tresc> tresc;
 
             using (ISession session = NhibernateSession.OpenSession())
@@ -24,6 +28,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Details(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Tresc tresc = new Tresc();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -47,14 +55,20 @@ namespace WirtualnyDziennik.Controllers
                     WirtualnyDziennik.Models.TypTresci.ListaDostepnych.Add(Item);
                 }
             }*/
-
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(Tresc model)
         {
-            
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
 
@@ -78,6 +92,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Message()
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             using (ISession session = NhibernateSession.OpenSession())
             {
              /*   List<TypTresci> jakas = session.Query<TypTresci>().ToList();
@@ -95,8 +113,11 @@ namespace WirtualnyDziennik.Controllers
 
         [HttpPost]
         public ActionResult Message(Tresc model)
-        {   
-            
+        {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())
@@ -120,6 +141,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Edit(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Tresc tresc = new Tresc();
             using (ISession session = NhibernateSession.OpenSession())
             {
@@ -142,6 +167,10 @@ namespace WirtualnyDziennik.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Tresc model)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 using (ISession session = NhibernateSession.OpenSession())
@@ -166,6 +195,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Delete(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Tresc tresc = new Tresc();
             List<Tresc> Lista = new List<Tresc>();
             using (ISession session = NhibernateSession.OpenSession())
@@ -216,6 +249,10 @@ namespace WirtualnyDziennik.Controllers
 
         public ActionResult Retrieve(int id)
         {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Uzytkownicy Odbiorca = new Uzytkownicy();
             List<Tresc> Dostepne;
             using (ISession session = NhibernateSession.OpenSession())

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<String>
+<div class="container body-content">
+    <p>
+        <button onclick="location.href='@Url.Action("CreateAdmin", "PlanLekcji",new { id = ViewData["klasaid"]})'" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Utwórz Ogłoszenie</button>
+    </p>                                                                                                             
+
+    <table class="body-content">
+        <tr>
+            <th>
+                @Html.DisplayName("Przypisane przedmioty do klasy:")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item)
+                </td>
+                <td></td>
+            </tr>
+        }
+
+    </table>
+</div>

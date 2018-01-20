@@ -290,6 +290,8 @@
     <Content Include="Views\Klasy\Add.cshtml" />
     <Content Include="Views\RodzicUczen\Index.cshtml" />
     <Content Include="Views\RodzicUczen\PrzypiszUcznia.cshtml" />
+    <Content Include="Views\PlanLekcji\CreateAdmin.cshtml" />
+    <Content Include="Views\PlanLekcji\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
