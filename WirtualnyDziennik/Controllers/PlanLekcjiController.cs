@@ -100,5 +100,32 @@ namespace WirtualnyDziennik.Controllers
                 ViewData["klasaid"] = id;
                 return View();
             }
+        [HttpPost]
+        public ActionResult CreateAdmin(int id, PlanLekcji model)
+        {
+            if (this.Session["UserProfile"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            PlanLekcji pl = new PlanLekcji();
+            try
+            {
+                using (ISession session = NhibernateSession.OpenSession())
+                {
+                    model.data = DateTime.Now.Date;
+                    
+                    using (ITransaction transaction = session.BeginTransaction())
+                    {
+                        session.Save(model);
+                        transaction.Commit();
+                    }
+                }
+                return RedirectToAction("Index",new {id=id });
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+        }
         }
     }
